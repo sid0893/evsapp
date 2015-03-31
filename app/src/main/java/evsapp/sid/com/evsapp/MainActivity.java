@@ -15,8 +15,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -179,7 +177,10 @@ public class MainActivity extends Activity implements OnItemSelectedListener {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             //disp.setText(position + " th item selected\n");
             mListView.setItemChecked(position,true);
-            setTitle(navDrawer[position]);
+            if(position==0)
+                setTitle(R.string.app_name);
+            else
+                setTitle(navDrawer[position]);
             mDrawerLayout.closeDrawer(mListView);
         }
     }
@@ -202,7 +203,7 @@ public class MainActivity extends Activity implements OnItemSelectedListener {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
+        // Handle action bar item clicks here. The action bar wild
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
