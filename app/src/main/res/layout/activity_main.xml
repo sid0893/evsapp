@@ -12,19 +12,22 @@ tools:context=".MainActivity">
     >
 
     <Spinner
+        android:theme="@android:style/Widget.Holo.Spinner"
         android:id="@+id/states_list"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50sp"
+        android:layout_marginTop="80sp"
         />
     <Spinner
+        android:theme="@android:style/Widget.Holo.Spinner"
         android:id="@+id/city_list"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50sp"
+        android:layout_marginTop="80sp"
     />
 
     <Button
+        android:theme="@android:style/Widget.Holo.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_get_data"
