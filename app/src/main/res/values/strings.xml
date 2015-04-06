@@ -10,6 +10,11 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="button_get_data">Get Data</string>
+
+    <string name="abt_us1">We are a group of 11 students pursuing Engineering (Computer Science) at IIIT Delhi,Okhla.\n
+        The source of all the information on this app is a website run by the government\n(http://www.cpcb.gov.in/CAAQM/mapPage/frmindiamap.aspx).\nWe do not guarantee that the information is correct. </string>
+    <string name="abt_us2">We do not guarantee that the information is correct.</string>
+    <string name="website">"<font color='#111'>(http://www.cpcb.gov.in/CAAQM/mapPage/frmindiamap.aspx).\n</font>"</string>
     <string-array name="states_list">
         <item>ANDHRA PRADESH</item>
         <item>BIHAR</item>
@@ -21,7 +26,6 @@
         <item>TAMIL NADU</item>
         <item>UTTAR PRADESH</item>
     </string-array>
-
     <string-array name="navigation_drawer">
         <item>Air Quality Index (AQI)</item>
         <item>About Us</item>
@@ -65,5 +69,7 @@
     </string-array>
     -->
 
+    <string name="title_activity_about_us">AboutUs</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

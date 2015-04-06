@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 
 import android.content.res.Configuration;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import java.util.ArrayList;
@@ -27,7 +29,7 @@ public class MainActivity extends Activity implements OnItemSelectedListener {
     String[] navDrawer;
     DrawerLayout mDrawerLayout;
     ListView mListView;
-    //TextView disp;
+    AnimationDrawable backAnimation;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -101,11 +103,11 @@ public class MainActivity extends Activity implements OnItemSelectedListener {
     private void initialiseDropDownMenus(){
         stateList = (Spinner)findViewById(R.id.states_list);
         cityList = (Spinner)findViewById(R.id.city_list);
-        mStateArrayAdapter = ArrayAdapter.createFromResource(this,R.array.states_list,android.R.layout.simple_spinner_item);
+        mStateArrayAdapter = ArrayAdapter.createFromResource(this,R.array.states_list,R.layout.spinner);
         mStateArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         stateList.setAdapter(mStateArrayAdapter);
 
-        mCityArrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item,cities);
+        mCityArrayAdapter = new ArrayAdapter(this, R.layout.spinner,cities);
         mCityArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         cityList.setAdapter(mCityArrayAdapter);
         stateList.setOnItemSelectedListener(this);
@@ -123,7 +125,7 @@ public class MainActivity extends Activity implements OnItemSelectedListener {
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
-                //getActionBar().setTitle(mTitle);
+                getActionBar().setTitle(mTitle);
                 //invalidateOptionsMenu();
             }
 
@@ -158,8 +160,19 @@ public class MainActivity extends Activity implements OnItemSelectedListener {
             }
         });
 
+        LinearLayout mLinearLayout = (LinearLayout)findViewById(R.id.fragment_container);
+        backAnimation = (AnimationDrawable)mLinearLayout.getBackground();
 
     }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if(hasFocus){
+            backAnimation.start();
+        }
+    }
+
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -175,12 +188,21 @@ public class MainActivity extends Activity implements OnItemSelectedListener {
     private class DrawerItemClickListener implements AdapterView.OnItemClickListener{
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            //disp.setText(position + " th item selected\n");
-            mListView.setItemChecked(position,true);
+
+           /* mListView.setItemChecked(position,true);
             if(position==0)
                 setTitle(R.string.app_name);
             else
                 setTitle(navDrawer[position]);
+            if(position==3){
+                Intent mIntent = new Intent(getApplicationContext(),AboutUs.class);
+                startActivity(mIntent);
+            }*/
+            switch(position){
+                case 3: Intent mIntent = new Intent(getApplicationContext(),AboutUs.class);
+                        startActivity(mIntent);break;
+
+            }
             mDrawerLayout.closeDrawer(mListView);
         }
     }

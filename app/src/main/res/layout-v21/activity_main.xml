@@ -1,6 +1,7 @@
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:tools="http://schemas.android.com/tools" android:id="@+id/drawer_layout"
 android:layout_width="match_parent" android:layout_height="match_parent"
+
 tools:context=".MainActivity">
 
 
@@ -9,34 +10,37 @@ tools:context=".MainActivity">
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
+    android:background="@drawable/back_animation"
     >
 
     <Spinner
-        android:theme="@android:style/Widget.Material.Spinner"
+        android:theme="@style/SpinnerDropDown"
         android:id="@+id/states_list"
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80sp"
+        android:layout_marginTop="100sp"
         android:elevation="5dp"
-        />
+    />
     <Spinner
-        android:theme="@android:style/Widget.Material.Spinner"
+        android:theme="@style/SpinnerDropDown"
         android:id="@+id/city_list"
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="80sp"
         android:elevation="5dp"
     />
 
     <Button
-        android:theme="@android:style/Widget.Material.Button"
+        android:theme="@style/Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_get_data"
         android:id="@+id/buttonGetData"
-        android:layout_marginTop="50sp"
+        android:layout_marginTop="100sp"
         android:elevation="5dp"
-    />
+        android:background="@drawable/roundbutton"
+        android:stateListAnimator="@anim/button_elevation"
+        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>
 

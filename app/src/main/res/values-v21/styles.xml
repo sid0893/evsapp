@@ -1,16 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="AppTheme" parent="android:Theme.Material">
-        <!-- Customize your theme here. -->
 
-        <!-- Main theme colors -->
-        <!--   your app branding color for the app bar -->
-        <item name="android:colorPrimary">@android:color/holo_blue_light</item>
-        <!--   darker variant for the status bar and contextual app bars -->
+        <item name="android:colorPrimary">@android:color/holo_blue_bright</item>
         <item name="android:colorPrimaryDark">@android:color/holo_blue_dark</item>
-        <!--   theme UI controls like checkboxes and text fields -->
         <item name="android:colorAccent">@android:color/holo_blue_bright</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:navigationBarColor">@android:color/holo_blue_light</item>
+        <item name="android:windowBackground">@android:color/holo_blue_light</item>
+        <item name="android:dropDownListViewStyle">@style/SpinnerDropDown</item>
+    </style>
+    
+    <style name="SpinnerDropDown" parent="android:Widget.ListView.DropDown">
+        <item name="android:divider">@android:color/darker_gray</item>
+        <item name="android:textColor">@android:color/holo_blue_light</item>
+        <item name="android:dividerHeight">2sp</item>
+    </style>
+
+
+
+    <style name="Button" parent="@android:style/Widget.Material.Button">
+
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:width">60dp</item>
+        <item name="android:height">85dp</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:elevation">50dp</item>
+        <item name="android:translationZ">10dp</item>
+        <item name="android:shape">oval</item>
 
     </style>
+
+
 
 </resources>
