@@ -13,6 +13,11 @@ tools:context=".MainActivity">
     android:background="@drawable/back_animation"
     >
 
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/tool_bar"></include>
+
+
     <Spinner
         android:theme="@style/SpinnerDropDown"
         android:id="@+id/states_list"
@@ -45,7 +50,7 @@ tools:context=".MainActivity">
 </LinearLayout>
 
 <ListView android:id="@+id/left_drawer"
-    android:layout_width="240dp"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:layout_gravity="start"
     android:choiceMode="singleChoice"

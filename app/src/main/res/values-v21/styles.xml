@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme" parent="android:Theme.Material">
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
 
         <item name="android:colorPrimary">@android:color/holo_blue_bright</item>
         <item name="android:colorPrimaryDark">@android:color/holo_blue_dark</item>
@@ -9,6 +9,7 @@
         <item name="android:navigationBarColor">@android:color/holo_blue_light</item>
         <item name="android:windowBackground">@android:color/holo_blue_light</item>
         <item name="android:dropDownListViewStyle">@style/SpinnerDropDown</item>
+
     </style>
     
     <style name="SpinnerDropDown" parent="android:Widget.ListView.DropDown">
@@ -19,7 +20,7 @@
 
 
 
-    <style name="Button" parent="@android:style/Widget.Material.Button">
+    <style name="Button" parent="android:style/Widget.Material.Button">
 
         <item name="android:textColor">@android:color/white</item>
         <item name="android:padding">0dp</item>
@@ -30,6 +31,13 @@
         <item name="android:translationZ">10dp</item>
         <item name="android:shape">oval</item>
 
+    </style>
+
+    <style name="Drawer" parent="android:Widget.Material.ListView">
+        <item name="android:background">@android:color/black</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:dividerHeight">5dp</item>
+        <item name="android:divider">@android:color/holo_blue_bright</item>
     </style>
 
 

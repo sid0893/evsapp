@@ -1,13 +1,15 @@
 package evsapp.sid.com.evsapp;
 
-import android.app.Activity;
-import android.content.Intent;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,7 +17,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.Spinner;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,16 +25,20 @@ import java.util.Arrays;
 import static android.widget.AdapterView.OnItemSelectedListener;
 
 
-public class MainActivity extends Activity implements OnItemSelectedListener {
+public class MainActivity extends ActionBarActivity implements OnItemSelectedListener {
 
-    String[] navDrawer;
+    public static String[] navDrawer;
+    int[] navDrawerIcons;
     DrawerLayout mDrawerLayout;
-    ListView mListView;
+    //ListView mListView;
+    RecyclerView mRecyclerView;
+    RecyclerView.Adapter mAdapter;
     AnimationDrawable backAnimation;
-    private CharSequence mDrawerTitle;
-    private CharSequence mTitle;
-    private ActionBarDrawerToggle mDrawerToggle;
+    RecyclerView.LayoutManager mLayoutManager;
 
+    private CharSequence mTitle;
+    private android.support.v7.app.ActionBarDrawerToggle mActionBarDrawerToggle;
+    private Toolbar mToolbar;
     public static final String STATE_AND_CITY = "1";
     Spinner stateList,cityList;
     Button getPollutionData = null;
@@ -116,35 +121,57 @@ public class MainActivity extends Activity implements OnItemSelectedListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main1);
         mTitle = getTitle();
-        mDrawerTitle = "Options";
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,R.drawable.ic_drawer,
+        mToolbar = (Toolbar)findViewById(R.id.tool_bar);
+        setSupportActionBar(mToolbar);
+        mActionBarDrawerToggle = new android.support.v7.app.ActionBarDrawerToggle(this,mDrawerLayout,mToolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close){
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                // code here will execute once the drawer is opened( As I dont want anything happened whe drawer is
+                // open I am not going to put anything here)
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+                getSupportActionBar().setTitle(mTitle);
+                // Code here will execute once drawer is closed
+            }
+
+        };
+               /* new ActionBarDrawerToggle(this, mDrawerLayout,R.drawable.ic_drawer,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close){
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
-                getActionBar().setTitle(mTitle);
+                //getActionBar().setTitle(mTitle);
                 //invalidateOptionsMenu();
             }
 
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                getActionBar().setTitle(mDrawerTitle);
+                //getActionBar().setTitle(mDrawerTitle);
                 //invalidateOptionsMenu();
             }
-        };
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        };*/
+        mDrawerLayout.setDrawerListener(mActionBarDrawerToggle);
 
         navDrawer = new String[]{"Select City","Based On Current Location","Tell a Friend","About Us"};
+        navDrawerIcons = new int[]{R.drawable.input_tablet,R.drawable.ic_action_locate,R.drawable.ic_action_share,R.drawable.ic_action_user};
+        //mListView = (ListView)findViewById(R.id.left_drawer);
+        mRecyclerView = (RecyclerView)findViewById(R.id.left_drawer);
+        mRecyclerView.setHasFixedSize(true);
+        mAdapter = new MyAdapter(navDrawer,navDrawerIcons,this);
 
-        mListView = (ListView)findViewById(R.id.left_drawer);
-        mListView.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,navDrawer));
-        mListView.setOnItemClickListener(new DrawerItemClickListener());
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
+        mRecyclerView.setAdapter(mAdapter);
+        mLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
         getPollutionData = (Button)findViewById(R.id.buttonGetData);
 
         initialiseStates();
@@ -177,19 +204,25 @@ public class MainActivity extends Activity implements OnItemSelectedListener {
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         // Sync the toggle state after onRestoreInstanceState has occurred.
-        mDrawerToggle.syncState();
+        mActionBarDrawerToggle.syncState();
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        mDrawerToggle.onConfigurationChanged(newConfig);
+        mActionBarDrawerToggle.onConfigurationChanged(newConfig);
     }
-    private class DrawerItemClickListener implements AdapterView.OnItemClickListener{
+   /* private class DrawerItemClickListener implements RecyclerView.OnClickListener {
         @Override
+        public void onClick(View v) {
+            Toast mToast = Toast.makeText(getApplicationContext(), "clicked", Toast.LENGTH_SHORT);
+            mToast.show();
+        }
+    }*/
+       /* @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-           /* mListView.setItemChecked(position,true);
+           *//**//* mListView.setItemChecked(position,true);
             if(position==0)
                 setTitle(R.string.app_name);
             else
@@ -197,20 +230,20 @@ public class MainActivity extends Activity implements OnItemSelectedListener {
             if(position==3){
                 Intent mIntent = new Intent(getApplicationContext(),AboutUs.class);
                 startActivity(mIntent);
-            }*/
+            }*//**//*
             switch(position){
                 case 3: Intent mIntent = new Intent(getApplicationContext(),AboutUs.class);
                         startActivity(mIntent);break;
 
             }
-            mDrawerLayout.closeDrawer(mListView);
-        }
+            mDrawerLayout.closeDrawer(mRecyclerView);
+        }*//*
     }
-
+*/
     @Override
     public void setTitle(CharSequence title) {
         //mTitle = title;
-        getActionBar().setTitle(title);
+        //getSupportActionBar().setTitle(title);
 
     }
 
@@ -231,7 +264,7 @@ public class MainActivity extends Activity implements OnItemSelectedListener {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
+        if (mActionBarDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
         if (id == R.id.action_settings) {

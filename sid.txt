@@ -1,0 +1,78 @@
+haryana
+
+
+faridabad
+
+http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Sector16A%20Faridabad&StateId=9&CityId=365
+
+
+
+delhi 
+
+
+dce http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=D.C.E.&StateId=6&CityId=85
+
+
+dilshad garden 
+http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Ihbas&StateId=6&CityId=85
+
+
+shadipur
+ http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Shadipur&StateId=6&CityId=85
+
+
+ITO
+ http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=ITO&StateId=6&CityId=85
+
+
+dwarka
+ http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Dwarka&StateId=6&CityId=85
+
+
+
+uttar pradesh
+
+
+agra 
+http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Sanjay%20Palace&StateId=28&CityId=253
+
+lucknow 
+http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Talkatora&StateId=28&CityId=256
+
+http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Lalbagh&StateId=28&CityId=256
+
+
+http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Lalbagh&StateId=28&CityId=256
+
+
+kanpur
+http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Nehru%20Nagar&StateId=28&CityId=278
+
+
+varanasi
+http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Ardhali%20Bazar&StateId=28&CityId=270
+
+gujarat
+
+ahmedabad
+http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Maninagar&StateId=8&CityId=337
+
+andhra pradesh 
+
+hyderabad
+http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Hyderabad&StateId=1&CityId=7
+
+karnataka
+
+bangalore
+http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=BTM&StateId=13&CityId=136
+http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Peenya&StateId=13&CityId=136
+http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=BWSSB&StateId=13&CityId=136
+
+tamil nadu 
+
+chennai
+http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Alandur%20&StateId=25&CityId=546
+http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=IIT&StateId=25&CityId=546
+http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Manali&StateId=25&CityId=546
+
