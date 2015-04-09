@@ -4,5 +4,5 @@
     android:layout_height="wrap_content"
     android:textSize="25sp"
     android:textColor="@android:color/black"
-    android:textStyle="bold|italic"
+    android:textStyle="bold"
     android:gravity="center"/>
