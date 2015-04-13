@@ -18,6 +18,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+
+import org.apache.http.protocol.HTTP;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -40,9 +43,9 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
     private android.support.v7.app.ActionBarDrawerToggle mActionBarDrawerToggle;
     private Toolbar mToolbar;
     public static final String STATE_AND_CITY = "1";
-    Spinner stateList,cityList;
+    Spinner stateList, cityList;
     Button getPollutionData = null;
-    ArrayAdapter<CharSequence> mStateArrayAdapter=null,mCityArrayAdapter=null;
+    ArrayAdapter<CharSequence> mStateArrayAdapter = null, mCityArrayAdapter = null;
     ArrayList<String> cities = null;
     ArrayList<String> delhi = null;
     ArrayList<String> uttar_pradesh = null;
@@ -59,10 +62,13 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
         //display = (TextView)findViewById(R.id.resultDisplay);
-        switch(parent.getId()){
-            case R.id.states_list: /*display.setText("state selected");*/setCityList(position);break;
+        switch (parent.getId()) {
+            case R.id.states_list: /*display.setText("state selected");*/
+                setCityList(position);
+                break;
 
-            case R.id.city_list: /*display.setText("city selected");*/break;
+            case R.id.city_list: /*display.setText("city selected");*/
+                break;
         }
 
     }
@@ -72,29 +78,47 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
 
     }
 
-    private void setCityList(int position){
+    private void setCityList(int position) {
 
         cities.clear();
-        switch(position){
-            case 0: cities.addAll(andhra_pradesh);break;
-            case 1: cities.addAll(bihar);break;
-            case 2: cities.addAll(delhi);break;
-            case 3: cities.addAll(gujarat);break;
-            case 4: cities.addAll(haryana);break;
-            case 5: cities.addAll(karnataka);break;
-            case 6: cities.addAll(maharashtra);break;
-            case 7: cities.addAll(tamil_nadu);break;
-            case 8: cities.addAll(uttar_pradesh);break;
+        switch (position) {
+            case 0:
+                cities.addAll(andhra_pradesh);
+                break;
+            case 1:
+                cities.addAll(bihar);
+                break;
+            case 2:
+                cities.addAll(delhi);
+                break;
+            case 3:
+                cities.addAll(gujarat);
+                break;
+            case 4:
+                cities.addAll(haryana);
+                break;
+            case 5:
+                cities.addAll(karnataka);
+                break;
+            case 6:
+                cities.addAll(maharashtra);
+                break;
+            case 7:
+                cities.addAll(tamil_nadu);
+                break;
+            case 8:
+                cities.addAll(uttar_pradesh);
+                break;
         }
 
         //mCityArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mCityArrayAdapter.notifyDataSetChanged();
     }
 
-    private void initialiseStates(){
+    private void initialiseStates() {
         cities = new ArrayList<>();
-        delhi = new ArrayList<>(Arrays.asList("D.C.E.","Shadipur","I.T.O.","Dilshad Garden","Dwarka"));
-        uttar_pradesh = new ArrayList<>(Arrays.asList("Agra","Lucknow","Kanpur","Varanasi"));
+        delhi = new ArrayList<>(Arrays.asList("D.C.E.", "Shadipur", "I.T.O.", "Dilshad Garden", "Dwarka"));
+        uttar_pradesh = new ArrayList<>(Arrays.asList("Agra", "Lucknow", "Kanpur", "Varanasi"));
         andhra_pradesh = new ArrayList<>(Arrays.asList("Hyderabad"));
         bihar = new ArrayList<>(Arrays.asList("Patna"));
         gujarat = new ArrayList<>(Arrays.asList("Ahmedabad"));
@@ -105,28 +129,29 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
         cities.addAll(delhi);
     }
 
-    private void initialiseDropDownMenus(){
-        stateList = (Spinner)findViewById(R.id.states_list);
-        cityList = (Spinner)findViewById(R.id.city_list);
-        mStateArrayAdapter = ArrayAdapter.createFromResource(this,R.array.states_list,R.layout.spinner);
+    private void initialiseDropDownMenus() {
+        stateList = (Spinner) findViewById(R.id.states_list);
+        cityList = (Spinner) findViewById(R.id.city_list);
+        mStateArrayAdapter = ArrayAdapter.createFromResource(this, R.array.states_list, R.layout.spinner);
         mStateArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         stateList.setAdapter(mStateArrayAdapter);
 
-        mCityArrayAdapter = new ArrayAdapter(this, R.layout.spinner,cities);
+        mCityArrayAdapter = new ArrayAdapter(this, R.layout.spinner, cities);
         mCityArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         cityList.setAdapter(mCityArrayAdapter);
         stateList.setOnItemSelectedListener(this);
         cityList.setOnItemSelectedListener(this);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main1);
         mTitle = getTitle();
-        mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-        mToolbar = (Toolbar)findViewById(R.id.tool_bar);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mToolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(mToolbar);
-        mActionBarDrawerToggle = new android.support.v7.app.ActionBarDrawerToggle(this,mDrawerLayout,mToolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close){
+        mActionBarDrawerToggle = new android.support.v7.app.ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
@@ -142,37 +167,22 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
             }
 
         };
-               /* new ActionBarDrawerToggle(this, mDrawerLayout,R.drawable.ic_drawer,
-                R.string.navigation_drawer_open, R.string.navigation_drawer_close){
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                super.onDrawerClosed(drawerView);
-                //getActionBar().setTitle(mTitle);
-                //invalidateOptionsMenu();
-            }
 
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                //getActionBar().setTitle(mDrawerTitle);
-                //invalidateOptionsMenu();
-            }
-        };*/
         mDrawerLayout.setDrawerListener(mActionBarDrawerToggle);
 
-        navDrawer = new String[]{"Select City","Based On Current Location","Tell a Friend","About Us"};
-        navDrawerIcons = new int[]{R.drawable.input_tablet,R.drawable.ic_action_locate,R.drawable.ic_action_share,R.drawable.ic_action_user};
+        navDrawer = new String[]{"Select City", "Based On Current Location", "About Us"};
+        navDrawerIcons = new int[]{R.drawable.ic_action_place, R.drawable.ic_action_location_found, R.drawable.ic_action_about};
         //mListView = (ListView)findViewById(R.id.left_drawer);
-        mRecyclerView = (RecyclerView)findViewById(R.id.left_drawer);
+        mRecyclerView = (RecyclerView) findViewById(R.id.left_drawer);
         mRecyclerView.setHasFixedSize(true);
-        mAdapter = new MyAdapter(navDrawer,navDrawerIcons,this);
+        mAdapter = new MyAdapter(navDrawer, navDrawerIcons, this);
 
         mRecyclerView.setAdapter(mAdapter);
-        mLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        getPollutionData = (Button)findViewById(R.id.buttonGetData);
+        getPollutionData = (Button) findViewById(R.id.buttonGetData);
 
         initialiseStates();
         initialiseDropDownMenus();
@@ -180,23 +190,22 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
         getPollutionData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String[] stateAndCity = new String[]{stateList.getSelectedItem().toString(),cityList.getSelectedItem().toString()};
-                Intent displayResult = new Intent(getApplicationContext(),DisplayResult.class);
+                String[] stateAndCity = new String[]{stateList.getSelectedItem().toString(), cityList.getSelectedItem().toString()};
+                Intent displayResult = new Intent(getApplicationContext(), DisplayResult.class);
                 displayResult.putExtra(STATE_AND_CITY, stateAndCity);
                 startActivity(displayResult);
             }
         });
 
-        LinearLayout mLinearLayout = (LinearLayout)findViewById(R.id.fragment_container);
-        backAnimation = (AnimationDrawable)mLinearLayout.getBackground();
+        LinearLayout mLinearLayout = (LinearLayout) findViewById(R.id.fragment_container);
 
     }
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        if(hasFocus){
-            backAnimation.start();
+        if (hasFocus) {
+            //    backAnimation.start();
         }
     }
 
@@ -212,13 +221,14 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
         super.onConfigurationChanged(newConfig);
         mActionBarDrawerToggle.onConfigurationChanged(newConfig);
     }
-   /* private class DrawerItemClickListener implements RecyclerView.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            Toast mToast = Toast.makeText(getApplicationContext(), "clicked", Toast.LENGTH_SHORT);
-            mToast.show();
-        }
-    }*/
+
+    /* private class DrawerItemClickListener implements RecyclerView.OnClickListener {
+         @Override
+         public void onClick(View v) {
+             Toast mToast = Toast.makeText(getApplicationContext(), "clicked", Toast.LENGTH_SHORT);
+             mToast.show();
+         }
+     }*/
        /* @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -247,8 +257,6 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
 
     }
 
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -267,7 +275,14 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
         if (mActionBarDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_share_app) {
+            Intent share = new Intent();
+            share.setAction(Intent.ACTION_SEND);
+            share.putExtra(Intent.EXTRA_TEXT,"share app link or some text");
+            share.setType(HTTP.PLAIN_TEXT_TYPE);
+            if (share.resolveActivity(getPackageManager()) != null) {
+                startActivity(share);
+            }
             return true;
         }
 

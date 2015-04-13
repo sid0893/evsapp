@@ -13,12 +13,12 @@
         android:height="85dp"/>
 </shape>-->
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="@android:color/holo_purple"
+    android:color="@color/DodgerBlue"
     >
     <item>
         <shape xmlns:android="http://schemas.android.com/apk/res/android">
             <corners android:radius="1dp" />
-            <solid android:color="@android:color/holo_blue_dark" />
+            <solid android:color="@color/RoyalBlue" />
         </shape>
     </item>
 </ripple>

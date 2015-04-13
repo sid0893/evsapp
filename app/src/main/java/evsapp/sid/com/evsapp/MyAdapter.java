@@ -4,6 +4,7 @@ package evsapp.sid.com.evsapp;
  * Created by hp on 07-04-2015.
  */
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,6 +53,22 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         @Override
         public void onClick(View v) {
             Toast.makeText(mContext,"The Item Clicked is: "+MainActivity.navDrawer[getPosition()-1],Toast.LENGTH_SHORT).show();
+            int id = getPosition();
+            switch (id){
+                case 1:
+
+                    break;
+                case 2:
+
+                    break;
+                case 3:
+
+                    break;
+                case 4:
+
+                    break;
+
+            }
 
 
         }
