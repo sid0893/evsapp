@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.method.ScrollingMovementMethod;
@@ -46,6 +47,13 @@ public class DisplayResult extends ActionBarActivity {
         setContentView(R.layout.activity_display_result);
         mToolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(mToolbar);
+        mToolbar.setNavigationIcon(R.drawable.ic_action_back);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavUtils.navigateUpFromSameTask(DisplayResult.this);
+            }
+        });
         //pollutants = new HashMap<>();
         display = (TextView) findViewById(R.id.resultDisplay);
         //display.setMovementMethod(new ScrollingMovementMethod());
@@ -113,7 +121,7 @@ public class DisplayResult extends ActionBarActivity {
                 tv_i3.setTextColor(getResources().getColor(R.color.Black));
 
                 tv_i1.setText(cols.get(0).text());
-                tv_i2.setText(cols.get(3).text());
+                tv_i2.setText(cols.get(3).text()+" "+cols.get(4).text());
                 tv_i3.setText(cols.get(5).text());
 
                 Log.d(TAG, tv_i1.toString() + "\n" + tv_i2.toString() + "\n" + tv_i3.toString());
