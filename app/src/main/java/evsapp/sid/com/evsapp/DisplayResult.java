@@ -45,14 +45,19 @@ public class DisplayResult extends ActionBarActivity {
         mToolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(mToolbar);
         //pollutants = new HashMap<>();
-        //display = (TextView) findViewById(R.id.resultDisplay);
+        display = (TextView) findViewById(R.id.resultDisplay);
         //display.setMovementMethod(new ScrollingMovementMethod());
         Intent mIntent = getIntent();
         String[] stateAndCity = mIntent.getStringArrayExtra(MainActivity.STATE_AND_CITY);
 
+
         query = "http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=D.C.E.&StateId=6&CityId=85";  //HOMEPAGE OF THE WEBSITE
         new ReadWebpageContents().execute("http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Sanjay%20Palace&StateId=28&CityId=253");
         //display.setText("Table\t" + stateAndCity[0] + " : " + stateAndCity[1] + "\n");
+
+
+        display.setText("Air Pollution Levels of: " + stateAndCity[1] + "," + stateAndCity[0]);
+
 
     }
 
@@ -83,8 +88,9 @@ public class DisplayResult extends ActionBarActivity {
             // display.append(cols.get(0).text()+"\t"+cols.get(3).text()+"\t"+cols.get(5).text());
             // display.append("\n");
 
+
             for (int i = 1; i < rows.size()-1; i++) { //first row is the col names so skipping it.
-                row=null;cols=null;
+                //row=null;cols=null;
                 row = rows.get(i);
                 cols = row.select("td");
                 //pollutants[i][0] = cols.get(0).text();

@@ -18,14 +18,18 @@
         layout="@layout/tool_bar"></include>
 
 
-   <!-- <TextView
+    <TextView
         android:id="@+id/resultDisplay"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/result_data"
-        android:maxLines="1000"
-        android:scrollbars="vertical" />
--->
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="@color/MidnightBlue"
+        android:background="@android:color/darker_gray"
+        android:maxLines="1"
+        android:textAppearance="?android:textAppearanceMedium"
+        />
+
     <TableLayout
         android:id="@+id/displaytable"
         android:layout_width="match_parent"
