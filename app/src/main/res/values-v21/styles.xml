@@ -40,6 +40,14 @@
         <item name="android:divider">@color/DodgerBlue</item>
     </style>
 
+    <style name="TableTextViewStyle" parent="TextAppearance.AppCompat">
+
+
+
+
+
+
+    </style>
 
 
 </resources>

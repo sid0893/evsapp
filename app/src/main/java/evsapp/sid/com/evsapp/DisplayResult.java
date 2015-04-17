@@ -42,17 +42,17 @@ public class DisplayResult extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_result);
-        mToolbar = (Toolbar) findViewById(R.id.disp_toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(mToolbar);
         //pollutants = new HashMap<>();
-        display = (TextView) findViewById(R.id.resultDisplay);
-        display.setMovementMethod(new ScrollingMovementMethod());
+        //display = (TextView) findViewById(R.id.resultDisplay);
+        //display.setMovementMethod(new ScrollingMovementMethod());
         Intent mIntent = getIntent();
         String[] stateAndCity = mIntent.getStringArrayExtra(MainActivity.STATE_AND_CITY);
 
         query = "http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=D.C.E.&StateId=6&CityId=85";  //HOMEPAGE OF THE WEBSITE
         new ReadWebpageContents().execute(query);
-        display.setText("Table\t" + stateAndCity[0] + " : " + stateAndCity[1] + "\n");
+        //display.setText("Table\t" + stateAndCity[0] + " : " + stateAndCity[1] + "\n");
 
     }
 
