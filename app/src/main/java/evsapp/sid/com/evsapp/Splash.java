@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
  */
 public class Splash extends Activity {
     AnimationDrawable backAnimation;
-    private static int SPLASH_TIME_OUT = 5000;
+    private static int SPLASH_TIME_OUT = 2000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

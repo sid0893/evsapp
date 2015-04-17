@@ -4,6 +4,8 @@ package evsapp.sid.com.evsapp;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.drawable.AnimationDrawable;
+import android.location.Location;
+import android.location.LocationListener;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -278,7 +280,7 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
         if (id == R.id.action_share_app) {
             Intent share = new Intent();
             share.setAction(Intent.ACTION_SEND);
-            share.putExtra(Intent.EXTRA_TEXT,"share app link or some text");
+            share.putExtra(Intent.EXTRA_TEXT, "share app link or some text");
             share.setType(HTTP.PLAIN_TEXT_TYPE);
             if (share.resolveActivity(getPackageManager()) != null) {
                 startActivity(share);
@@ -288,4 +290,6 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }

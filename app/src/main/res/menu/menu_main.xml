@@ -6,7 +6,7 @@
     <item android:id="@+id/action_share_app"
         android:icon="@drawable/ic_action_share"
         android:title="@string/action_share_app"
-        app:showAsAction="always"
+        app:showAsAction="always|withText"
         android:orderInCategory="1"
         android:menuCategory="secondary"/>
 

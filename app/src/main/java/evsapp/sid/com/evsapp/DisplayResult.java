@@ -51,7 +51,7 @@ public class DisplayResult extends ActionBarActivity {
         String[] stateAndCity = mIntent.getStringArrayExtra(MainActivity.STATE_AND_CITY);
 
         query = "http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=D.C.E.&StateId=6&CityId=85";  //HOMEPAGE OF THE WEBSITE
-        new ReadWebpageContents().execute(query);
+        new ReadWebpageContents().execute("http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Sanjay%20Palace&StateId=28&CityId=253");
         //display.setText("Table\t" + stateAndCity[0] + " : " + stateAndCity[1] + "\n");
 
     }
@@ -74,8 +74,8 @@ public class DisplayResult extends ActionBarActivity {
             tableLayout = (TableLayout) findViewById(R.id.displaytable);
             Element table = document.getElementById("Td1").select("table").get(0); //selecting first table
             Elements rows = table.select("tr");
-            Element row = rows.get(0);
-            Elements cols = row.select("td");
+            Element row;
+            Elements cols;
             // String[] header = {"Parameters", " Date", "Time", "Concentration", "Unit", "Concentration (previous 24 Hours) / Prescribed Standard" };
             String[][] pollutants = new String[rows.size()][3];
 
@@ -83,11 +83,12 @@ public class DisplayResult extends ActionBarActivity {
             // display.append(cols.get(0).text()+"\t"+cols.get(3).text()+"\t"+cols.get(5).text());
             // display.append("\n");
 
-            for (int i = 1; i < rows.size(); i++) { //first row is the col names so skipping it.
+            for (int i = 1; i < rows.size()-1; i++) { //first row is the col names so skipping it.
+                row=null;cols=null;
                 row = rows.get(i);
                 cols = row.select("td");
                 //pollutants[i][0] = cols.get(0).text();
-                // pollutants[i][1] = cols.get(3).text();
+                //pollutants[i][1] = cols.get(3).text();
                 //pollutants[i][2] = cols.get(5).text();
                 TableRow tr = new TableRow(getApplicationContext());
                 TableRow.LayoutParams tlParams = new TableRow.LayoutParams(

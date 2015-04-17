@@ -11,6 +11,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="button_get_data">Get Data</string>
+    <string name="google_maps_key">AIzaSyAAFQCoptmPS1ipBACqyKyRtHWoFU8fpxc</string>
 
     <string name="abt_us1">We are a group of 11 students pursuing Engineering (Computer Science) at IIIT Delhi,Okhla.\n
         The source of all the information on this app is a website run by the government\n(http://www.cpcb.gov.in/CAAQM/mapPage/frmindiamap.aspx).\nWe do not guarantee that the information is correct. </string>
@@ -72,5 +73,6 @@
 
     <string name="title_activity_about_us">AboutUs</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>
