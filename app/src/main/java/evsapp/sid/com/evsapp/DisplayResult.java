@@ -50,7 +50,7 @@ public class DisplayResult extends ActionBarActivity {
         Intent mIntent = getIntent();
         String[] stateAndCity = mIntent.getStringArrayExtra(MainActivity.STATE_AND_CITY);
 
-        query = "http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=D.C.E.&StateId=6&CityId=85";  //HOMEPAGE OF THE WEBSITE
+        query = "http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=ITO&StateId=6&CityId=85";  //HOMEPAGE OF THE WEBSITE
         new ReadWebpageContents().execute(query);
         display.setText("Table\t" + stateAndCity[0] + " : " + stateAndCity[1] + "\n");
 
@@ -83,7 +83,7 @@ public class DisplayResult extends ActionBarActivity {
             // display.append(cols.get(0).text()+"\t"+cols.get(3).text()+"\t"+cols.get(5).text());
             // display.append("\n");
 
-            for (int i = 1; i < rows.size(); i++) { //first row is the col names so skipping it.
+            for (int i = 1; i < (rows.size()-1); i++) { //first row is the col names so skipping it.
                 row = rows.get(i);
                 cols = row.select("td");
                 //pollutants[i][0] = cols.get(0).text();
