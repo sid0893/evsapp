@@ -3,8 +3,12 @@ package evsapp.sid.com.evsapp;
 /**
  * Created by hp on 07-04-2015.
  */
+
+import android.app.Activity;
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,30 +25,31 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_ITEM = 1;
 
+    public LocationManager service;
+
     private String mNavTitles[];
     private int mIcons[];
     Context context;
 
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         int Holderid;
         TextView textView;
         ImageView imageView;
         Context mContext;
 
-        public ViewHolder(View itemView,int ViewType,Context c) {
+        public ViewHolder(View itemView, int ViewType, Context c) {
             super(itemView);
             mContext = c;
 
-            if(ViewType == TYPE_ITEM) {
+            if (ViewType == TYPE_ITEM) {
                 itemView.setClickable(true);
                 itemView.setOnClickListener(this);
                 textView = (TextView) itemView.findViewById(R.id.rowText);
                 imageView = (ImageView) itemView.findViewById(R.id.rowIcon);
                 Holderid = 1;
-            }
-            else{
+            } else {
                 Holderid = 0;
             }
         }
@@ -52,14 +57,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         @Override
         public void onClick(View v) {
-            Toast.makeText(mContext,"The Item Clicked is: "+MainActivity.navDrawer[getPosition()-1],Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "The Item Clicked is: " + MainActivity.navDrawer[getPosition() - 1], Toast.LENGTH_SHORT).show();
             int id = getPosition();
-            switch (id){
+            switch (id) {
                 case 1:
 
                     break;
                 case 2:
-
+                    mContext.startActivity(new Intent(mContext, LocationBased.class));
                     break;
                 case 3:
 
@@ -75,8 +80,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
 
 
-
-    MyAdapter(String Titles[],int Icons[],Context con){
+    MyAdapter(String Titles[], int Icons[], Context con) {
         mNavTitles = Titles;
         mIcons = Icons;
         context = con;
@@ -88,17 +92,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         if (viewType == TYPE_ITEM) {
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_row,parent,false);
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_row, parent, false);
 
-            ViewHolder vhItem = new ViewHolder(v,viewType,context);
+            ViewHolder vhItem = new ViewHolder(v, viewType, context);
 
             return vhItem;
 
         } else if (viewType == TYPE_HEADER) {
 
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.header,parent,false);
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.header, parent, false);
 
-            ViewHolder vhHeader = new ViewHolder(v,viewType,context);
+            ViewHolder vhHeader = new ViewHolder(v, viewType, context);
 
             return vhHeader;
 
@@ -110,17 +114,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(MyAdapter.ViewHolder holder, int position) {
-        if(holder.Holderid ==1) {                              // as the list view is going to be called after the header view so we decrement the
+        if (holder.Holderid == 1) {                              // as the list view is going to be called after the header view so we decrement the
             // position by 1 and pass it to the holder while setting the text and image
             holder.textView.setText(mNavTitles[position - 1]); // Setting the Text with the array of our Titles
-            holder.imageView.setImageResource(mIcons[position -1]);// Settimg the image with array of our icons
+            holder.imageView.setImageResource(mIcons[position - 1]);// Settimg the image with array of our icons
         }
     }
 
     // This method returns the number of items present in the list
     @Override
     public int getItemCount() {
-        return mNavTitles.length+1; // the number of items in the list will be +1 the titles including the header view.
+        return mNavTitles.length + 1; // the number of items in the list will be +1 the titles including the header view.
     }
 
 
