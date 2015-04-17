@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/Aqua"
     android:id="@+id/disp_ll"
 
     tools:context="evsapp.sid.com.evsapp.DisplayResult">
@@ -29,21 +30,32 @@
         android:maxLines="1"
         android:textAppearance="?android:textAppearanceMedium"
         />
+    <ScrollView
+        android:id="@+id/scrollview"
+        android:layout_height="match_parent"
+        android:scrollbars="horizontal|vertical"
+        android:layout_width="match_parent"
+        android:layout_marginTop="2dip"
+        android:scrollbarStyle="insideOverlay"
+        android:fillViewport="true"
+        >
+
+
 
     <TableLayout
         android:id="@+id/displaytable"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/Aqua"
+
         >
 
         <TableRow
             android:id="@+id/display_row"
-            android:layout_margin="2dip"
+
             android:paddingTop="3dp"
             android:paddingBottom="3dp"
             android:background="@color/RoyalBlue"
-
+            android:layout_width="match_parent"
             android:elevation="15dp">
 
             <TextView
@@ -81,5 +93,6 @@
 
     </TableLayout>
 
+    </ScrollView>
 
 </LinearLayout>

@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -37,6 +38,7 @@ public class DisplayResult extends ActionBarActivity {
     Bitmap mDataBitmap = null;
     Toolbar mToolbar;
     TableLayout tableLayout;
+    TableRow.LayoutParams params;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +51,9 @@ public class DisplayResult extends ActionBarActivity {
         //display.setMovementMethod(new ScrollingMovementMethod());
         Intent mIntent = getIntent();
         String[] stateAndCity = mIntent.getStringArrayExtra(MainActivity.STATE_AND_CITY);
-
+        params = new TableRow.LayoutParams(
+                TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.MATCH_PARENT);
+        params.weight = 1.0f;
 
         query = "http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=D.C.E.&StateId=6&CityId=85";  //HOMEPAGE OF THE WEBSITE
         new ReadWebpageContents().execute("http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Sanjay%20Palace&StateId=28&CityId=253");
@@ -57,6 +61,7 @@ public class DisplayResult extends ActionBarActivity {
 
 
         display.setText("Air Pollution Levels of: " + stateAndCity[1] + "," + stateAndCity[0]);
+
 
 
     }
@@ -110,10 +115,14 @@ public class DisplayResult extends ActionBarActivity {
                 tv_i1.setText(cols.get(0).text());
                 tv_i2.setText(cols.get(3).text());
                 tv_i3.setText(cols.get(5).text());
+
                 Log.d(TAG, tv_i1.toString() + "\n" + tv_i2.toString() + "\n" + tv_i3.toString());
                 tr.addView(tv_i1);
                 tr.addView(tv_i2);
                 tr.addView(tv_i3);
+                tv_i1.setLayoutParams(params);
+                tv_i2.setLayoutParams(params);
+                tv_i3.setLayoutParams(params);
                 tableLayout.addView(tr);
                 //    pollutants.put(cols.get(0).text(), new String[]{cols.get(3).text() + " " + cols.get(4).text(), cols.get(5).text()});
 
