@@ -40,7 +40,7 @@ import java.util.Map;
 
 public class LocationBased extends ActionBarActivity implements LocationListener {
 
-    private String TAG = "LOCATIONBASED";
+    public static String TAG = "LOCATIONBASED";
     Toolbar mToolbar;
     private GoogleMap map; // Might be null if Google Play services APK is not available.
 
@@ -72,7 +72,7 @@ public class LocationBased extends ActionBarActivity implements LocationListener
         map.addMarker(new MarkerOptions()
                         .position(latLng)
                         .title("Your Current Position")
-                        .draggable(false));
+                        .draggable(false)).showInfoWindow();
 
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(
                 new LatLng(location.getLatitude(), location.getLongitude()), 16));

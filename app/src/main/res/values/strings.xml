@@ -20,8 +20,7 @@
     <string name="abt_us2">We do not guarantee that the information is correct.</string>
     <string name="website">"<font color='#111'>(http://www.cpcb.gov.in/CAAQM/mapPage/frmindiamap.aspx).\n</font>"</string>
     <string-array name="states_list">
-        <item>ANDHRA PRADESH</item>
-        <item>BIHAR</item>
+        <item>TELANGANA</item>
         <item>DELHI</item>
         <item>GUJARAT</item>
         <item>HARYANA</item>
@@ -76,5 +75,8 @@
     <string name="title_activity_about_us">AboutUs</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_maps">Map</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

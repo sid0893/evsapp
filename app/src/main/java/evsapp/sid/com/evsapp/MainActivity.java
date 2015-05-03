@@ -25,9 +25,11 @@ import org.apache.http.protocol.HTTP;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 
 import static android.widget.AdapterView.OnItemSelectedListener;
+
 
 
 public class MainActivity extends ActionBarActivity implements OnItemSelectedListener {
@@ -36,6 +38,8 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
     int[] navDrawerIcons;
     DrawerLayout mDrawerLayout;
     //ListView mListView;
+    HashMap<String,ArrayList<String>> stateToCity;
+    //HashMap<String,ArrayList<String>> cityToDistrict = new HashMap<>();
     RecyclerView mRecyclerView;
     RecyclerView.Adapter mAdapter;
     AnimationDrawable backAnimation;
@@ -47,17 +51,29 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
     public static final String STATE_AND_CITY = "1";
     Spinner stateList, cityList;
     Button getPollutionData = null;
-    ArrayAdapter<CharSequence> mStateArrayAdapter = null, mCityArrayAdapter = null;
+    ArrayAdapter<CharSequence> mStateArrayAdapter = null, mCityArrayAdapter = null ;
     ArrayList<String> cities = null;
+    ArrayList<String> districts = null;
     ArrayList<String> delhi = null;
     ArrayList<String> uttar_pradesh = null;
-    ArrayList<String> andhra_pradesh = null;
-    ArrayList<String> bihar = null;
+    //ArrayList<String> andhra_pradesh = null;
+    ArrayList<String> telangana = null;
+    //ArrayList<String> bihar = null;
     ArrayList<String> gujarat = null;
     ArrayList<String> haryana = null;
     ArrayList<String> karnataka = null;
     ArrayList<String> maharashtra = null;
     ArrayList<String> tamil_nadu = null;
+
+//    ArrayList<String> NewDelhi = null;
+//    ArrayList<String> Agra=null,Lucknow=null,Kanpur=null,Varanasi=null;
+//    ArrayList<String> Hyderabad = null;
+//    ArrayList<String> Ahmedabad = null;
+//    ArrayList<String> Faridabad = null;
+//    ArrayList<String> Bangalore = null;
+//    ArrayList<String> Mumbai=null,Chandrapur=null;
+//    ArrayList<String> Chennai = null;
+
 
 
     @Override
@@ -66,11 +82,12 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
         //display = (TextView)findViewById(R.id.resultDisplay);
         switch (parent.getId()) {
             case R.id.states_list: /*display.setText("state selected");*/
-                setCityList(position);
+                setCityList(parent.getSelectedItem().toString());
                 break;
 
-            case R.id.city_list: /*display.setText("city selected");*/
-                break;
+//            case R.id.city_list: /*display.setText("city selected");*/
+//                setDistrictList(parent.getSelectedItem().toString());
+//                break;
         }
 
     }
@@ -80,60 +97,142 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
 
     }
 
-    private void setCityList(int position) {
+//    private void setDistrictList(String city){
+//        districts.clear();
+//        districts.addAll(cityToDistrict.get(city));
+//        /*switch (position) {
+//            case 0:
+//                districts.addAll(telangana);
+//                break;
+//            case 1:
+//                districts.addAll(delhi);
+//                break;
+//            case 2:
+//                districts.addAll(gujarat);
+//                break;
+//            case 3:
+//                districts.addAll(haryana);
+//                break;
+//            case 4:
+//                districts.addAll(karnataka);
+//                break;
+//            case 5:
+//                districts.addAll(maharashtra);
+//                break;
+//            case 6:
+//                districts.addAll(tamil_nadu);
+//                break;
+//            case 7:
+//                districts.addAll(uttar_pradesh);
+//                break;
+//
+//        }*/
+//
+//        //mCityArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        mDistrictArrayAdapter.notifyDataSetChanged();
+//
+//    }
+    private void setCityList(String state) {
 
         cities.clear();
-        switch (position) {
-            case 0:
-                cities.addAll(andhra_pradesh);
-                break;
-            case 1:
-                cities.addAll(bihar);
-                break;
-            case 2:
-                cities.addAll(delhi);
-                break;
-            case 3:
-                cities.addAll(gujarat);
-                break;
-            case 4:
-                cities.addAll(haryana);
-                break;
-            case 5:
-                cities.addAll(karnataka);
-                break;
-            case 6:
-                cities.addAll(maharashtra);
-                break;
-            case 7:
-                cities.addAll(tamil_nadu);
-                break;
-            case 8:
-                cities.addAll(uttar_pradesh);
-                break;
-        }
+        cities.addAll(stateToCity.get(state));
+//        switch (position) {
+//            case 0:
+//                cities.addAll(telangana);
+//                break;
+//            case 1:
+//                cities.addAll(delhi);
+//                break;
+//            case 2:
+//                cities.addAll(gujarat);
+//                break;
+//            case 3:
+//                cities.addAll(haryana);
+//                break;
+//            case 4:
+//                cities.addAll(karnataka);
+//                break;
+//            case 5:
+//                cities.addAll(maharashtra);
+//                break;
+//            case 6:
+//                cities.addAll(tamil_nadu);
+//                break;
+//            case 7:
+//                cities.addAll(uttar_pradesh);
+//                break;
+//
+//        }
 
         //mCityArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mCityArrayAdapter.notifyDataSetChanged();
     }
 
-    private void initialiseStates() {
-        cities = new ArrayList<>();
-        delhi = new ArrayList<>(Arrays.asList("D.C.E.", "Shadipur", "I.T.O.", "Dilshad Garden", "Dwarka"));
-        uttar_pradesh = new ArrayList<>(Arrays.asList("Agra", "Lucknow", "Kanpur", "Varanasi"));
-        andhra_pradesh = new ArrayList<>(Arrays.asList("Hyderabad"));
-        bihar = new ArrayList<>(Arrays.asList("Patna"));
-        gujarat = new ArrayList<>(Arrays.asList("Ahmedabad"));
-        haryana = new ArrayList<>(Arrays.asList("Faridabad"));
-        karnataka = new ArrayList<>(Arrays.asList("Bangalore"));
-        maharashtra = new ArrayList<>(Arrays.asList("Mumbai"));
-        tamil_nadu = new ArrayList<>(Arrays.asList("Chennai"));
-        cities.addAll(delhi);
+    private void initialiseStates(){
+
+        delhi = new ArrayList<>(Arrays.asList("D.C.E.", "Shadipur", "I.T.O.", "Dilshad Garden", "Dwarka","Punjabi Bagh","I.G.I Airport",
+                "I.S.B.T. Anand Vihar","Mandir Marg","Civil Lines","R.K. Puram"));
+        stateToCity.put("DELHI",delhi);
+        uttar_pradesh = new ArrayList<>(Arrays.asList("Agra : Sanjay Palace", "Lucknow : Talkatora",
+                "Lucknow : Lalbagh","Lucknow : Central School","Kanpur : Central School",
+                "Varanasi : Ardhali Bazar"));
+        stateToCity.put("UTTAR PRADESH",uttar_pradesh);
+        telangana = new ArrayList<>(Arrays.asList("Hyderabad : SanathNagar"));
+        stateToCity.put("TELANGANA",telangana);
+        //bihar = new ArrayList<>(Arrays.asList("Patna"));
+        gujarat = new ArrayList<>(Arrays.asList("Ahmedabad : Maninagar"));
+        stateToCity.put("GUJARAT",gujarat);
+        haryana = new ArrayList<>(Arrays.asList("Faridabad : Sector16A Faridabad"));
+        stateToCity.put("HARYANA",haryana);
+        karnataka = new ArrayList<>(Arrays.asList("Bangalore : BTM","Bangalore : Peenya",
+                "Bangalore : BWSSB Kadabesanahalli"));
+        stateToCity.put("KARNATAKA",karnataka);
+        maharashtra = new ArrayList<>(Arrays.asList("Mumbai : Navi Mumbai Municipal Corporation AIROLI",
+                "Chandrapur : Chandrapur"));
+        stateToCity.put("MAHARASHTRA",maharashtra);
+        tamil_nadu = new ArrayList<>(Arrays.asList("Chennai : Alandur Bus Depot",
+                "Chennai : IIT","Chennai : Manali"));
+        stateToCity.put("TAMIL NADU",tamil_nadu);
+        cities.addAll(telangana);
+        mCityArrayAdapter.notifyDataSetChanged();
     }
+//    private void initialiseCities() {
+//
+//        NewDelhi = new ArrayList<>(Arrays.asList("D.C.E.", "Shadipur", "I.T.O.", "Dilshad Garden", "Dwarka","Punjabi Bagh","I.G.I Airport",
+//                "I.S.B.T. Anand Vihar","Mandir Marg","Civil Lines","R.K. Puram"));
+//        cityToDistrict.put("New Delhi",NewDelhi);
+//        Agra = new ArrayList<>(Arrays.asList("Sanjay Palace"));
+//        cityToDistrict.put("Agra",Agra);
+//        Lucknow = new ArrayList<>(Arrays.asList("Talkatora","Lalbagh","Central School"));
+//        cityToDistrict.put("Lucknow",Lucknow);
+//        Kanpur  = new ArrayList<>(Arrays.asList(""Nehru Nagar));
+//        cityToDistrict.put("Kanpur",Kanpur);
+//        Varanasi = new ArrayList<>(Arrays.asList("Ardhali Bazar"));
+//        cityToDistrict.put("Varanasi",Varanasi);
+//        Hyderabad = new ArrayList<>(Arrays.asList("SanathNagar"));
+//        cityToDistrict.put("Hyderabad",Hyderabad);
+//        Ahmedabad = new ArrayList<>(Arrays.asList("Maninagar"));
+//        cityToDistrict.put("Ahmedabad",Ahmedabad);
+//        Faridabad = new ArrayList<>(Arrays.asList("Sector16A Faridabad"));
+//        cityToDistrict.put("Faridabad",Faridabad);
+//        Bangalore = new ArrayList<>(Arrays.asList("BTM","Peenya","BWSSB Kadabesanahalli"));
+//        cityToDistrict.put("Bangalore",Bangalore);
+//        Mumbai = new ArrayList<>(Arrays.asList("Navi Mumbai Municipal Corporation AIROLI"));
+//        cityToDistrict.put("Mumbai",Mumbai);
+//        Chandrapur = new ArrayList<>(Arrays.asList("Chandrapur"));
+//        cityToDistrict.put("Chandrapur",Chandrapur);
+//        Chennai = new ArrayList<>(Arrays.asList("Alandur Bus Depot","IIT","Manali"));
+//        cityToDistrict.put("Chennai",Chennai);
+//        districts.addAll(Hyderabad);
+//        mDistrictArrayAdapter.notifyDataSetChanged();
+//   }
 
     private void initialiseDropDownMenus() {
+        districts = new ArrayList<>();
+        cities = new ArrayList<>();
         stateList = (Spinner) findViewById(R.id.states_list);
         cityList = (Spinner) findViewById(R.id.city_list);
+        //districtList = (Spinner)findViewById(R.id.district_list);
         mStateArrayAdapter = ArrayAdapter.createFromResource(this, R.array.states_list, R.layout.spinner);
         mStateArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         stateList.setAdapter(mStateArrayAdapter);
@@ -141,8 +240,14 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
         mCityArrayAdapter = new ArrayAdapter(this, R.layout.spinner, cities);
         mCityArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         cityList.setAdapter(mCityArrayAdapter);
+
+//        mDistrictArrayAdapter = new ArrayAdapter(this,R.layout.spinner,districts);
+//        mDistrictArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        districtList.setAdapter(mDistrictArrayAdapter);
+
         stateList.setOnItemSelectedListener(this);
         cityList.setOnItemSelectedListener(this);
+        //districtList.setOnItemSelectedListener(this);
     }
 
     @Override
@@ -185,9 +290,12 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         getPollutionData = (Button) findViewById(R.id.buttonGetData);
-
-        initialiseStates();
+        stateToCity= new HashMap<>();
+        //cityToDistrict = new HashMap<>();
         initialiseDropDownMenus();
+        initialiseStates();
+        //initialiseCities();
+
 
         getPollutionData.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -199,7 +307,7 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
             }
         });
 
-        LinearLayout mLinearLayout = (LinearLayout) findViewById(R.id.fragment_container);
+        //LinearLayout mLinearLayout = (LinearLayout) findViewById(R.id.fragment_container);
 
     }
 
@@ -277,16 +385,7 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
         if (mActionBarDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-        if (id == R.id.action_share_app) {
-            Intent share = new Intent();
-            share.setAction(Intent.ACTION_SEND);
-            share.putExtra(Intent.EXTRA_TEXT, "share app link or some text");
-            share.setType(HTTP.PLAIN_TEXT_TYPE);
-            if (share.resolveActivity(getPackageManager()) != null) {
-                startActivity(share);
-            }
-            return true;
-        }
+
 
         return super.onOptionsItemSelected(item);
     }
