@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.mikepenz.aboutlibraries.Libs;
 
+import com.mikepenz.aboutlibraries.Libs;
+
 
 public class AboutUs extends Activity {
 
