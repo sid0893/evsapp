@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.mikepenz.aboutlibraries.Libs;
+
 
 public class AboutUs extends Activity {
 
@@ -41,7 +43,14 @@ public class AboutUs extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about_us);
+       // setContentView(R.layout.activity_about_us);
+        new Libs.Builder()
+                //Pass the fields of your application to the lib so it can find all external lib information
+                .withFields(R.string.class.getFields()).withAboutIconShown(true)
+                .withAboutVersionShown(true)
+                .withAboutDescription("This is an app to show real time pollution data and Air Quality Index.<br /><b>Try it </b>")
+                        //start the activity
+                .start(this);
     }
 
 

@@ -61,12 +61,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             int id = getPosition();
             switch (id) {
                 case 1:
-
+                    mContext.startActivity(new Intent(mContext, MainActivity.class));
                     break;
                 case 2:
                     mContext.startActivity(new Intent(mContext, LocationBased.class));
                     break;
                 case 3:
+                    mContext.startActivity(new Intent(mContext, AboutUs.class));
 
                     break;
                 case 4:
