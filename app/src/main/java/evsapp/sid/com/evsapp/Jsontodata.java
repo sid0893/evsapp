@@ -15,6 +15,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,6 +24,8 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
 
 import evsapp.sid.com.evsapp.Utils.VolleySingleton;
 
@@ -34,7 +37,8 @@ public class Jsontodata {
     private final static String TAG = "JSON_TO_DATABASE";
     private static final String url = "https://api.myjson.com/bins/4hfc5";
     private Context context;
-
+    Map<String,String> queries;
+    Map<String,LatLng> latLngMap;
 
     public Jsontodata(Context context) {
         this.context = context;
@@ -102,6 +106,9 @@ public class Jsontodata {
             @Override
             public void onResponse(JSONArray response) {
                 try {
+                    queries = new HashMap<String,String>();
+                    latLngMap = new HashMap<String,LatLng>();
+
                     for (int i = 0; i <= response.length()+1; i++) {
 
                         JSONObject place = (JSONObject) response.get(i);
@@ -113,7 +120,11 @@ public class Jsontodata {
                         JSONObject latlng = place.getJSONObject("latlng");
                         Double latitude = latlng.getDouble("latitude");
                         Double longitude = latlng.getDouble("longitude");
+                        LatLng latLng1 = new LatLng(latitude,longitude);
+
                         Log.d(TAG,  " centre: " + centre_name + " query: " + query + " latlng :" + latitude + "," + longitude);
+                        queries.put(centre_name,query);
+                        latlng.put(centre_name,latLng1);
                         // Place temp = new Place(state_name,city_name,centre_name,query,latitude,longitude);
 
                     }
