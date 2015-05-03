@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">EVSapp</string>
+    <string name="app_name">Air Quality India</string>
     <string name="title_activity_display_result">Result Data</string>
     <string name="result_data">RESULT</string>
     <string name="action_settings">Settings</string>

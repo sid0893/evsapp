@@ -19,12 +19,11 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/evs"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
             android:name=".Splash"
-            android:label="@string/select_city"
             android:screenOrientation="portrait"
 
             android:theme="@style/AppTheme">
@@ -39,7 +38,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:label="@string/select_city"
+
 
             android:screenOrientation="portrait">
 
@@ -62,6 +61,7 @@
         </activity>
         <activity
             android:name=".LocationBased"
+            android:screenOrientation="portrait"
             android:label="@string/current_location"
             android:parentActivityName=".MainActivity" />
         <activity

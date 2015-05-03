@@ -1,3 +1,4 @@
+
 package evsapp.sid.com.evsapp;
 
 import android.annotation.SuppressLint;
@@ -78,14 +79,16 @@ public class LocationBased extends ActionBarActivity implements LocationListener
                 NavUtils.navigateUpFromSameTask(LocationBased.this);
             }
         });
+        mJsontodata = new Jsontodata(getApplicationContext());
+        mJsontodata.startDataDownload();
+
         LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
 
         map = ((MapFragment) getFragmentManager().findFragmentById(R.id.mapView))
                 .getMap();
-        mJsontodata = new Jsontodata(getApplicationContext());
-        mJsontodata.startDataDownload();
+
 
 
     }
@@ -100,7 +103,7 @@ public class LocationBased extends ActionBarActivity implements LocationListener
                 .draggable(false)).showInfoWindow();
 
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(
-                new LatLng(location.getLatitude(), location.getLongitude()), 12));
+                new LatLng(location.getLatitude(), location.getLongitude()), 11));
 
         map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
                                              @Override
@@ -124,7 +127,7 @@ public class LocationBased extends ActionBarActivity implements LocationListener
                     .position(latLng)
                     .title("Nearest Location #"+(i+1)+": "+mJsontodata.latLngMap.get(mJsontodata.mLocations.get(i))+"\nDistance: "
                     +location.distanceTo(mJsontodata.mLocations.get(i)))
-                    .draggable(false)).showInfoWindow();
+                    .draggable(false));
         }
         Snackbar.with(getApplicationContext())
                 .duration(Snackbar.SnackbarDuration.LENGTH_LONG)// context
