@@ -1,7 +1,9 @@
 package evsapp.sid.com.evsapp;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.drawable.AnimationDrawable;
 import android.location.Location;
@@ -24,6 +26,7 @@ import android.widget.Spinner;
 
 import org.apache.http.protocol.HTTP;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -50,6 +53,7 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
     private android.support.v7.app.ActionBarDrawerToggle mActionBarDrawerToggle;
     private Toolbar mToolbar;
     public static final String STATE_AND_CITY = "1";
+    public static final String JSON = "2";
     Spinner stateList, cityList;
     Button getPollutionData = null;
     ArrayAdapter<CharSequence> mStateArrayAdapter = null, mCityArrayAdapter = null ;
@@ -66,6 +70,7 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
     ArrayList<String> maharashtra = null;
     ArrayList<String> tamil_nadu = null;
     String centreName=null;
+    public static Jsontodata mJsontodata=null;
 
 //    ArrayList<String> NewDelhi = null;
 //    ArrayList<String> Agra=null,Lucknow=null,Kanpur=null,Varanasi=null;
@@ -280,6 +285,8 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
             }
 
         };
+        mJsontodata = new Jsontodata(getApplicationContext());
+        mJsontodata.startDataDownload();
 
         mDrawerLayout.setDrawerListener(mActionBarDrawerToggle);
 
@@ -309,6 +316,9 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
                 //String[] stateAndCity = new String[]{stateList.getSelectedItem().toString(), cityList.getSelectedItem().toString()};
                 Intent displayResult = new Intent(getApplicationContext(), DisplayResult.class);
                 displayResult.putExtra(STATE_AND_CITY, centreName);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(JSON, (Serializable)(mJsontodata.queries));
+                displayResult.putExtras(bundle);
                 startActivity(displayResult);
             }
         });

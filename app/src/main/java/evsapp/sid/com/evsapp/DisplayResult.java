@@ -44,12 +44,13 @@ public class DisplayResult extends ActionBarActivity {
     private final static String TAG = "DisplayResult";
     TextView display;
     //HashMap<String,String[]> pollutants;
-    String query = null;
+    String myQuery = null;
     Bitmap mDataBitmap = null;
     Toolbar mToolbar;
     TableLayout tableLayout;
     TableRow.LayoutParams params;
     Calendar c;
+    HashMap<String,String> query=null;
     int seconds;
     String filePath = Environment.getExternalStorageDirectory()
             + File.separator + "Pictures/";
@@ -58,6 +59,11 @@ public class DisplayResult extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_result);
+        Bundle args = getIntent().getExtras();
+        if(args!=null){
+            query = (HashMap)(args.getSerializable(MainActivity.JSON));
+            Log.d("hm",query.toString());
+        }
         mToolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(mToolbar);
         mToolbar.setNavigationIcon(R.drawable.ic_action_back);
@@ -84,8 +90,10 @@ public class DisplayResult extends ActionBarActivity {
                 TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.MATCH_PARENT);
         params.weight = 1.0f;
 
-        query = "http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=D.C.E.&StateId=6&CityId=85";  //HOMEPAGE OF THE WEBSITE
-        new ReadWebpageContents().execute("http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Sanjay%20Palace&StateId=28&CityId=253");
+        myQuery = query.get("D.C.E");
+        Log.d("query",myQuery);
+        //query = "http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=D.C.E.&StateId=6&CityId=85";  //HOMEPAGE OF THE WEBSITE
+        new ReadWebpageContents().execute(myQuery);
         //display.setText("Table\t" + stateAndCity[0] + " : " + stateAndCity[1] + "\n");
 
 
@@ -124,7 +132,7 @@ public class DisplayResult extends ActionBarActivity {
             // display.append("\n");
 
 
-            for (int i = 1; i < rows.size()-1; i++) { //first row is the col names so skipping it.
+            for (int i = 1; i < rows.size(); i++) { //first row is the col names so skipping it.
                 //row=null;cols=null;
                 row = rows.get(i);
                 cols = row.select("td");
@@ -211,7 +219,7 @@ public class DisplayResult extends ActionBarActivity {
         switch (id) {
             case R.id.action_refresh:
                 tableLayout.removeViews(1,1);
-                new ReadWebpageContents().execute(query);
+                new ReadWebpageContents().execute(myQuery);
                 mDataBitmap = null;
                 return true;
             // case R.id.action_share_item : shareDataImage();return true;
