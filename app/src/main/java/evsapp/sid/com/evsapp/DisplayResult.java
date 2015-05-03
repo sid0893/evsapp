@@ -71,7 +71,15 @@ public class DisplayResult extends ActionBarActivity {
         display = (TextView) findViewById(R.id.resultDisplay);
         //display.setMovementMethod(new ScrollingMovementMethod());
         Intent mIntent = getIntent();
-        String[] stateAndCity = mIntent.getStringArrayExtra(MainActivity.STATE_AND_CITY);
+        String centreName = mIntent.getStringExtra(MainActivity.STATE_AND_CITY);
+        String[] cityAndCentre=null;
+        if(centreName.contains(":")){
+            cityAndCentre = centreName.split(": ");
+        }else{
+            cityAndCentre = new String[2];
+            cityAndCentre[0] = "Delhi";
+            cityAndCentre[1] = centreName;
+        }
         params = new TableRow.LayoutParams(
                 TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.MATCH_PARENT);
         params.weight = 1.0f;
@@ -81,7 +89,7 @@ public class DisplayResult extends ActionBarActivity {
         //display.setText("Table\t" + stateAndCity[0] + " : " + stateAndCity[1] + "\n");
 
 
-        display.setText("Air Pollution Levels of: " + stateAndCity[1] + "," + stateAndCity[0]);
+        display.setText("Air Pollution Levels of: " + cityAndCentre[1] + "," + cityAndCentre[0]);
         c = Calendar.getInstance();
 
 

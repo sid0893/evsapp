@@ -1,12 +1,42 @@
 package evsapp.sid.com.evsapp;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 
 public class AboutUs extends Activity {
+
+    public class ContactInfo {
+        protected String name;
+        protected String surname;
+        protected String email;
+        protected static final String NAME_PREFIX = "Name_";
+        protected static final String SURNAME_PREFIX = "Surname_";
+        protected static final String EMAIL_PREFIX = "email_";
+    }
+
+    public static class ContactViewHolder extends RecyclerView.ViewHolder {
+        protected TextView vName;
+        protected TextView vSurname;
+        protected TextView vEmail;
+        protected TextView vTitle;
+
+        public ContactViewHolder(View v) {
+            super(v);
+            vName =  (TextView) v.findViewById(R.id.txtName);
+            vSurname = (TextView)  v.findViewById(R.id.txtSurname);
+            vEmail = (TextView)  v.findViewById(R.id.txtEmail);
+            vTitle = (TextView) v.findViewById(R.id.title);
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

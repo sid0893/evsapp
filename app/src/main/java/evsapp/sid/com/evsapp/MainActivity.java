@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -64,6 +65,7 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
     ArrayList<String> karnataka = null;
     ArrayList<String> maharashtra = null;
     ArrayList<String> tamil_nadu = null;
+    String centreName=null;
 
 //    ArrayList<String> NewDelhi = null;
 //    ArrayList<String> Agra=null,Lucknow=null,Kanpur=null,Varanasi=null;
@@ -72,7 +74,8 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
 //    ArrayList<String> Faridabad = null;
 //    ArrayList<String> Bangalore = null;
 //    ArrayList<String> Mumbai=null,Chandrapur=null;
-//    ArrayList<String> Chennai = null;
+//    ArrayLsist<String> Chennai = null;
+
 
 
 
@@ -83,15 +86,18 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
         switch (parent.getId()) {
             case R.id.states_list: /*display.setText("state selected");*/
                 setCityList(parent.getSelectedItem().toString());
+                //String s = parent.getSelectedItem().toString();
+                //Log.d("select state",s);
                 break;
 
-//            case R.id.city_list: /*display.setText("city selected");*/
-//                setDistrictList(parent.getSelectedItem().toString());
-//                break;
+            case R.id.city_list: /*display.setText("city selected");*/
+                centreName= parent.getSelectedItem().toString();
+
+                //Log.d("select city",s1);
+                break;
         }
 
     }
-
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
@@ -300,9 +306,9 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
         getPollutionData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String[] stateAndCity = new String[]{stateList.getSelectedItem().toString(), cityList.getSelectedItem().toString()};
+                //String[] stateAndCity = new String[]{stateList.getSelectedItem().toString(), cityList.getSelectedItem().toString()};
                 Intent displayResult = new Intent(getApplicationContext(), DisplayResult.class);
-                displayResult.putExtra(STATE_AND_CITY, stateAndCity);
+                displayResult.putExtra(STATE_AND_CITY, centreName);
                 startActivity(displayResult);
             }
         });
