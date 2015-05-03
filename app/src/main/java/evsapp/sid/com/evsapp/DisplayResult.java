@@ -3,9 +3,13 @@ package evsapp.sid.com.evsapp;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+
+import android.support.v4.app.NavUtils;
+
 import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -31,6 +35,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.HashMap;
 
 
@@ -44,8 +49,10 @@ public class DisplayResult extends ActionBarActivity {
     Toolbar mToolbar;
     TableLayout tableLayout;
     TableRow.LayoutParams params;
+    Calendar c;
+    int seconds;
     String filePath = Environment.getExternalStorageDirectory()
-            + File.separator + "Pictures/screenshot.png";
+            + File.separator + "Pictures/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +60,13 @@ public class DisplayResult extends ActionBarActivity {
         setContentView(R.layout.activity_display_result);
         mToolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(mToolbar);
+        mToolbar.setNavigationIcon(R.drawable.ic_action_back);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavUtils.navigateUpFromSameTask(DisplayResult.this);
+            }
+        });
         //pollutants = new HashMap<>();
         display = (TextView) findViewById(R.id.resultDisplay);
         //display.setMovementMethod(new ScrollingMovementMethod());
@@ -68,6 +82,7 @@ public class DisplayResult extends ActionBarActivity {
 
 
         display.setText("Air Pollution Levels of: " + stateAndCity[1] + "," + stateAndCity[0]);
+        c = Calendar.getInstance();
 
 
 
@@ -120,7 +135,7 @@ public class DisplayResult extends ActionBarActivity {
                 tv_i3.setTextColor(getResources().getColor(R.color.Black));
 
                 tv_i1.setText(cols.get(0).text());
-                tv_i2.setText(cols.get(3).text());
+                tv_i2.setText(cols.get(3).text()+" "+cols.get(4).text());
                 tv_i3.setText(cols.get(5).text());
 
                 Log.d(TAG, tv_i1.toString() + "\n" + tv_i2.toString() + "\n" + tv_i3.toString());
@@ -152,11 +167,21 @@ public class DisplayResult extends ActionBarActivity {
 
     }*/
 
-    private Bitmap takeScreenshot() {
+    private void takeScreenshot() {
         View rootView = findViewById(android.R.id.content).getRootView();
+        rootView = findViewById(R.id.scrollview);
         rootView.setDrawingCacheEnabled(true);
         mDataBitmap= rootView.getDrawingCache();
-        return null;
+        //return null;
+    }
+
+    public void loadBitmapFromView() {
+        View v = findViewById(R.id.scrollview);
+        mDataBitmap = Bitmap.createBitmap(v.getWidth(), v.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas c = new Canvas(mDataBitmap);
+        v.layout(0, 0, v.getLayoutParams().width, v.getLayoutParams().height);
+        v.draw(c);
+        //return b;
     }
 
     @Override
@@ -184,6 +209,7 @@ public class DisplayResult extends ActionBarActivity {
             // case R.id.action_share_item : shareDataImage();return true;
             case R.id.action_share_data:
                 takeScreenshot();
+                //loadBitmapFromView();
                 saveBitmap(mDataBitmap);
                 send(filePath);
               /*  Intent share = new Intent();
@@ -200,7 +226,8 @@ public class DisplayResult extends ActionBarActivity {
     }
     public void saveBitmap(Bitmap bitmap) {
 
-        File imagePath = new File(filePath);
+        seconds = c.get(Calendar.SECOND);
+        File imagePath = new File(filePath+seconds+".jpg");
         FileOutputStream fos;
         try {
             fos = new FileOutputStream(imagePath);
