@@ -2,6 +2,7 @@ package evsapp.sid.com.evsapp;
 
 import android.content.Context;
 import android.content.res.AssetManager;
+import android.location.Location;
 import android.support.annotation.StringRes;
 import android.util.Log;
 
@@ -24,6 +25,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,11 +37,11 @@ import evsapp.sid.com.evsapp.Utils.VolleySingleton;
 public class Jsontodata {
 
     private final static String TAG = "JSON_TO_DATABASE";
-    private static final String url = "https://api.myjson.com/bins/4hfc5";
+    private static final String url = "https://api.myjson.com/bins/11jgl";
     private Context context;
-    Map<String,String> queries;
-    Map<String,LatLng> latLngMap;
-
+    HashMap<String,String> queries;
+    HashMap<Location,String> latLngMap;
+    ArrayList<Location> mLocations;
     public Jsontodata(Context context) {
         this.context = context;
 
@@ -107,7 +109,8 @@ public class Jsontodata {
             public void onResponse(JSONArray response) {
                 try {
                     queries = new HashMap<String,String>();
-                    latLngMap = new HashMap<String,LatLng>();
+                    latLngMap = new HashMap<Location,String>();
+                    mLocations = new ArrayList<>();
 
                     for (int i = 0; i <= response.length()+1; i++) {
 
@@ -120,11 +123,13 @@ public class Jsontodata {
                         JSONObject latlng = place.getJSONObject("latlng");
                         Double latitude = latlng.getDouble("latitude");
                         Double longitude = latlng.getDouble("longitude");
-                        LatLng latLng1 = new LatLng(latitude,longitude);
-
+                        //LatLng latLng1 = new LatLng(latitude,longitude);
+                        Location latlng1 = new Location("");
+                        latlng1.setLatitude(latitude);latlng1.setLongitude(longitude);
                         Log.d(TAG,  " centre: " + centre_name + " query: " + query + " latlng :" + latitude + "," + longitude);
                         queries.put(centre_name,query);
-                        latlng.put(centre_name,latLng1);
+                        latLngMap.put(latlng1,centre_name);
+                        mLocations.add(latlng1);
                         // Place temp = new Place(state_name,city_name,centre_name,query,latitude,longitude);
 
                     }

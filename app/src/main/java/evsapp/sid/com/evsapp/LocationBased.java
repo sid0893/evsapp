@@ -30,8 +30,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolygonOptions;
+import com.nispok.snackbar.Snackbar;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -43,9 +50,23 @@ public class LocationBased extends ActionBarActivity implements LocationListener
     public static String TAG = "LOCATIONBASED";
     Toolbar mToolbar;
     private GoogleMap map; // Might be null if Google Play services APK is not available.
+    Jsontodata mJsontodata;
+    Location mLocation=null;
+
+    public class Compare implements Comparator<Location> {
+
+        @Override
+        public int compare(Location lhs, Location rhs) {
+            float a = mLocation.distanceTo(lhs);
+            float b = mLocation.distanceTo(rhs);
+            return (int)(a-b);
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.basic_map);
         mToolbar = (Toolbar) findViewById(R.id.tool_bar);
@@ -63,36 +84,72 @@ public class LocationBased extends ActionBarActivity implements LocationListener
 
         map = ((MapFragment) getFragmentManager().findFragmentById(R.id.mapView))
                 .getMap();
+        mJsontodata = new Jsontodata(getApplicationContext());
+        mJsontodata.startDataDownload();
+
 
     }
     @Override
-    public void onLocationChanged(Location location) {
+    public void onLocationChanged(final Location location) {
         map.clear();
-        LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
+        mLocation = location;
+        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
         map.addMarker(new MarkerOptions()
-                        .position(latLng)
-                        .title("Your Current Position")
-                        .draggable(false)).showInfoWindow();
+                .position(latLng)
+                .title("Your Current Position")
+                .draggable(false)).showInfoWindow();
 
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(
-                new LatLng(location.getLatitude(), location.getLongitude()), 16));
+                new LatLng(location.getLatitude(), location.getLongitude()), 12));
 
         map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-                                              @Override
-                                              public void onInfoWindowClick(Marker marker) {
+                                             @Override
+                                             public void onInfoWindowClick(Marker marker) {
 
-                                                  if (marker.getTitle().equals("Your Current Position")) {
-                                                      Toast.makeText(LocationBased.this, marker.getTitle(), Toast.LENGTH_LONG).show();
-                                                      Intent student_ctr = new Intent(LocationBased.this, AQI.class);
-                                                      startActivity(student_ctr);
+                                                 if (marker.getTitle().equals("Your Current Position")) {
+                                                     Toast.makeText(LocationBased.this, marker.getTitle(), Toast.LENGTH_LONG).show();
+                                                     Intent student_ctr = new Intent(LocationBased.this, AQI.class);
+                                                     startActivity(student_ctr);
 
-                                                  }
+                                                 }
 
-                                              }
-                                          }
+                                             }
+                                         }
 
         );
+        Collections.sort(mJsontodata.mLocations,new Compare());
+        for(int i=0;i<3&&i<mJsontodata.mLocations.size();i++){
+            latLng = new LatLng(mJsontodata.mLocations.get(i).getLatitude(), mJsontodata.mLocations.get(i).getLongitude());
+            map.addMarker(new MarkerOptions()
+                    .position(latLng)
+                    .title("Nearest Location #"+(i+1)+": "+mJsontodata.latLngMap.get(mJsontodata.mLocations.get(i))+"\nDistance: "
+                    +location.distanceTo(mJsontodata.mLocations.get(i)))
+                    .draggable(false)).showInfoWindow();
+        }
+        Snackbar.with(getApplicationContext())
+                .duration(Snackbar.SnackbarDuration.LENGTH_LONG)// context
+                .text("Select one from the nearest 3 locations") // text to display
+                .show(this); // activity where it is displayed
+
+
     }
+//    private  HashMap sortByValues(HashMap map) {
+//        List list = new LinkedList(map.entrySet());
+//        // Defined Custom Comparator here
+//        Collections.sort(list, new Comparator() {
+//            public int compare(Object o1, Object o2) {
+//                return ((Comparable) ((Location) (((Map.Entry) (o1)).getValue())).distanceTo(mLocation))
+//                        .compareTo(((Location) (((Map.Entry) (o2)).getValue())).distanceTo(mLocation));
+//            }
+//        });
+//        HashMap sortedHashMap = new LinkedHashMap();
+//        for (Iterator it = list.iterator(); it.hasNext(); ) {
+//            Map.Entry entry = (Map.Entry) it.next();
+//            sortedHashMap.put(entry.getKey(), entry.getValue());
+//        }
+//        return sortedHashMap;
+//
+//    }
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
