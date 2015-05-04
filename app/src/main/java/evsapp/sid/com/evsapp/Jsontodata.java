@@ -37,7 +37,7 @@ import evsapp.sid.com.evsapp.Utils.VolleySingleton;
 public class Jsontodata {
 
     private final static String TAG = "JSON_TO_DATABASE";
-    private static final String url = "https://api.myjson.com/bins/11jgl";
+    private static final String url = "https://api.myjson.com/bins/56qlp";
     private Context context;
     HashMap<String,String> queries;
     HashMap<Location,String> latLngMap;
