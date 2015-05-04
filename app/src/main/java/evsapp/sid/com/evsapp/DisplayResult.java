@@ -59,11 +59,43 @@ public class DisplayResult extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_result);
-        Bundle args = getIntent().getExtras();
-        if(args!=null){
-            query = (HashMap)(args.getSerializable(MainActivity.JSON));
-            Log.d("hm",query.toString());
-        }
+        query = new HashMap<>();
+        query.put("D.C.E." ,"http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=D.C.E.&StateId=6&CityId=85");
+        query.put("Civil Lines","http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Civil5Lines&StateId=6&CityId=85");
+        query.put("Dilshad Garden",
+                "http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Ihbas&StateId=6&CityId=85");
+        query.put("Punjabi Bagh",
+                "http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Punjabi5Bagh&StateId=6&CityId=85");
+        query.put("I.S.B.T. Anand Vihar",
+                "http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Anand5Vihar&StateId=6&CityId=85");
+        query.put("Shadipur",
+                "http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Shadipur&StateId=6&CityId=85");
+        query.put("Mandi Marg",
+                "http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Mandir5Marg&StateId=6&CityId=85");
+        query.put( "I.T.O.",
+                "http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=ITO&StateId=6&CityId=85");
+        query.put("Dwarka",
+                "http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Dwarka&StateId=6&CityId=85");
+        query.put("I.G.I Airport","http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=IGI5Airport&StateId=6&CityId=85");
+        query.put("R.K. Puram","http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=R5K5Puram&StateId=6&CityId=85");
+        query.put("Sector16A Faridabad","http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Sector16A%20Faridabad&StateId=9&CityId=365");
+        query.put("Sanjay Palace","http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Sanjay%20Palace&StateId=28&CityId=253");
+        query.put("Talkatora","http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Talkatora&StateId=28&CityId=256");
+        query.put("Lalbagh","http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Lalbagh&StateId=28&CityId=256");
+        query.put("Central School","http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Central%20School&StateId=28&CityId=256");
+        query.put("Nehru Nagar","http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Nehru%20Nagar&StateId=28&CityId=278");
+        query.put("Ardhali Bazar","http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Ardhali%20Bazar&StateId=28&CityId=270");
+        query.put("Maninagar","http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Maninagar&StateId=8&CityId=337");
+        query.put("Navi Mumbai Municipal Corporation AIROLI","http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=NMMC%20Airoli&StateId=16&CityId=310");
+        query.put("Chandrapur","http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Chandrapur&StateId=16&CityId=329");
+        query.put("Sanathnagar","http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Hyderabad&StateId=1&CityId=7");
+        query.put("BTM","http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=BTM&StateId=13&CityId=136");
+        query.put("Peenya","http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Peenya&StateId=13&CityId=136");
+        query.put("BWSSB Kadabesanahalli","http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=BWSSB&StateId=13&CityId=136");
+        query.put("Alandur Bus Depot","http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Alandur%20&StateId=25&CityId=546");
+        query.put("IIT","http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=IIT&StateId=25&CityId=546");
+        query.put("Manali","http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Manali&StateId=25&CityId=546");
+
         mToolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(mToolbar);
         mToolbar.setNavigationIcon(R.drawable.ic_action_back);
@@ -85,7 +117,7 @@ public class DisplayResult extends ActionBarActivity {
                 TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.MATCH_PARENT);
         params.weight = 1.0f;
 
-        myQuery = query.get("D.C.E");
+        myQuery = query.get(cityAndCentre[1]);
         Log.d("query",myQuery);
         //query = "http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=D.C.E.&StateId=6&CityId=85";  //HOMEPAGE OF THE WEBSITE
         new ReadWebpageContents().execute(myQuery);
@@ -127,7 +159,7 @@ public class DisplayResult extends ActionBarActivity {
             // display.append("\n");
 
 
-            for (int i = 1; (i < rows.size())&&(i<9); i++) { //first row is the col names so skipping it.
+            for (int i = 1; (i < rows.size())&&(i<8); i++) { //first row is the col names so skipping it.
                 //row=null;cols=null;
                 row = rows.get(i);
                 cols = row.select("td");

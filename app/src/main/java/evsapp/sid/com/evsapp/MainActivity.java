@@ -319,9 +319,7 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
                 //String[] stateAndCity = new String[]{stateList.getSelectedItem().toString(), cityList.getSelectedItem().toString()};
                 Intent displayResult = new Intent(getApplicationContext(), DisplayResult.class);
                 displayResult.putExtra(STATE_AND_CITY, centreName);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable(JSON, (Serializable)(mJsontodata.queries));
-                displayResult.putExtras(bundle);
+
                 startActivity(displayResult);
             }
         });
@@ -330,9 +328,6 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
             public void onClick(View v) {
                 Intent disp = new Intent(getApplicationContext(),AQIDisplay.class);
                 disp.putExtra(STATE_AND_CITY, centreName);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable(JSON, (Serializable)(mJsontodata.queries));
-                disp.putExtras(bundle);
                 startActivity(disp);
             }
         });

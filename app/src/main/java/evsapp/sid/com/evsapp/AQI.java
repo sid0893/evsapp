@@ -11,6 +11,10 @@ public class AQI {
 
     HashMap<String, double[]> map = new HashMap<>();
 
+    public AQI(){
+        initialisemap();
+    }
+
     public void initialisemap() {
         map.put("Ozone", new double[]{138, 178, 220, 262, 790, 1070, 1280});
         map.put("PM 10", new double[]{54, 154, 254, 354, 424, 504, 604});
@@ -29,19 +33,20 @@ public class AQI {
 
     public int getIndex(String str,double val){
         double high=0,low=0,I_high=0,I_low=0;
-        for(int i=0;i<7;i++){
-            if(map.get(str)[i]>=val){
-                high = map.get(str)[i];
-                I_high = map.get("AQI")[i];
-                if(i!=0){
-                    low = map.get(str)[i-1]+1;
-                    I_low = map.get("AQI")[i-1]+1;
+        for(int i=0;i<7;i++) {
+            if (map.containsKey(str)) {
+                if (map.get(str)[i] >= val) {
+                    high = map.get(str)[i];
+                    I_high = map.get("AQI")[i];
+                    if (i != 0) {
+                        low = map.get(str)[i - 1] + 1;
+                        I_low = map.get("AQI")[i - 1] + 1;
+                    } else {
+                        low = 0;
+                        I_low = 0;
+                    }
+                    break;
                 }
-                else{
-                    low = 0;
-                    I_low = 0;
-                }
-                break;
             }
         }
         return getAQI(I_low, I_high, low, high, val);
