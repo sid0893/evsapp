@@ -25,26 +25,22 @@
         <activity
             android:name=".Splash"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" >
 
-            android:theme="@style/AppTheme">
-           <!-- <intent-filter>
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
--->
-
+            -->
 
         </activity>
         <activity
             android:name=".MainActivity"
-
-
-            android:screenOrientation="portrait">
-
+            android:screenOrientation="portrait" >
             android:screenOrientation="portrait" >
             <intent-filter>
-
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -61,9 +57,9 @@
         </activity>
         <activity
             android:name=".LocationBased"
-            android:screenOrientation="portrait"
             android:label="@string/current_location"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".AboutUs"
             android:label="@string/title_activity_about_us"
@@ -83,6 +79,14 @@
         <activity
             android:name=".AQI"
             android:label="AQI" >
+        </activity>
+        <activity
+            android:name=".AQIDisplay"
+            android:label="@string/title_activity_aqidisplay"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="evsapp.sid.com.evsapp.MainActivity" />
         </activity>
     </application>
 

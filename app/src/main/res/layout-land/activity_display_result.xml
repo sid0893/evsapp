@@ -24,7 +24,7 @@
         android:id="@+id/myTable"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <TextView
+    <!--<TextView
         android:id="@+id/resultDisplay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
         android:background="@android:color/darker_gray"
         android:maxLines="1"
         android:textAppearance="?android:textAppearanceMedium"
-        />
+        />-->
     <ScrollView
         android:id="@+id/scrollview"
         android:layout_height="match_parent"

@@ -74,18 +74,13 @@ public class DisplayResult extends ActionBarActivity {
             }
         });
         //pollutants = new HashMap<>();
-        display = (TextView) findViewById(R.id.resultDisplay);
+        //display = (TextView) findViewById(R.id.resultDisplay);
         //display.setMovementMethod(new ScrollingMovementMethod());
         Intent mIntent = getIntent();
         String centreName = mIntent.getStringExtra(MainActivity.STATE_AND_CITY);
         String[] cityAndCentre=null;
-        if(centreName.contains(":")){
-            cityAndCentre = centreName.split(": ");
-        }else{
-            cityAndCentre = new String[2];
-            cityAndCentre[0] = "Delhi";
-            cityAndCentre[1] = centreName;
-        }
+        cityAndCentre = centreName.split(": ");
+
         params = new TableRow.LayoutParams(
                 TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.MATCH_PARENT);
         params.weight = 1.0f;
@@ -97,7 +92,7 @@ public class DisplayResult extends ActionBarActivity {
         //display.setText("Table\t" + stateAndCity[0] + " : " + stateAndCity[1] + "\n");
 
 
-        display.setText("Air Pollution Levels of: " + cityAndCentre[1] + "," + cityAndCentre[0]);
+        //display.setText("Air Pollution Levels of: " + cityAndCentre[1] + "," + cityAndCentre[0]);
         c = Calendar.getInstance();
 
 
@@ -132,7 +127,7 @@ public class DisplayResult extends ActionBarActivity {
             // display.append("\n");
 
 
-            for (int i = 1; i < rows.size(); i++) { //first row is the col names so skipping it.
+            for (int i = 1; (i < rows.size())&&(i<9); i++) { //first row is the col names so skipping it.
                 //row=null;cols=null;
                 row = rows.get(i);
                 cols = row.select("td");

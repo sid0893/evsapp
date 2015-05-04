@@ -54,17 +54,36 @@
 
             />
 
+        <LinearLayout
+            android:layout_marginTop="30sp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
         <Button
             android:id="@+id/buttonGetData"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30sp"
+            android:layout_marginRight="10sp"
             android:background="@drawable/roundbutton"
             android:elevation="7dp"
             android:stateListAnimator="@anim/button_elevation"
             android:text="@string/button_get_data"
             android:theme="@style/Button" />
+
+        <Button
+            android:id="@+id/buttonGetAQI"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:background="@drawable/roundbutton"
+            android:elevation="7dp"
+            android:stateListAnimator="@anim/button_elevation"
+            android:text="@string/button_get_aqi"
+            android:theme="@style/Button" />
+        </LinearLayout>
 
     </LinearLayout>
 

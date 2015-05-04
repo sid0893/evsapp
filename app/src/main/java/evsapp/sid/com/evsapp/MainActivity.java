@@ -56,6 +56,7 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
     public static final String JSON = "2";
     Spinner stateList, cityList;
     Button getPollutionData = null;
+    Button getAQI = null;
     ArrayAdapter<CharSequence> mStateArrayAdapter = null, mCityArrayAdapter = null ;
     ArrayList<String> cities = null;
     ArrayList<String> districts = null;
@@ -181,8 +182,9 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
 
     private void initialiseStates(){
 
-        delhi = new ArrayList<>(Arrays.asList("D.C.E.", "Shadipur", "I.T.O.", "Dilshad Garden", "Dwarka","Punjabi Bagh","I.G.I Airport",
-                "I.S.B.T. Anand Vihar","Mandir Marg","Civil Lines","R.K. Puram"));
+        delhi = new ArrayList<>(Arrays.asList("Delhi : D.C.E.", "Delhi : Shadipur", "Delhi : I.T.O.", "Delhi : Dilshad Garden",
+                "Delhi : Dwarka","Delhi : Punjabi Bagh","Delhi : I.G.I Airport",
+                "Delhi : I.S.B.T. Anand Vihar","Delhi : Mandir Marg","Delhi : Civil Lines","Delhi : R.K. Puram"));
         stateToCity.put("DELHI",delhi);
         uttar_pradesh = new ArrayList<>(Arrays.asList("Agra : Sanjay Palace", "Lucknow : Talkatora",
                 "Lucknow : Lalbagh","Lucknow : Central School","Kanpur : Central School",
@@ -303,6 +305,7 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         getPollutionData = (Button) findViewById(R.id.buttonGetData);
+        getAQI = (Button)findViewById(R.id.buttonGetAQI);
         stateToCity= new HashMap<>();
         //cityToDistrict = new HashMap<>();
         initialiseDropDownMenus();
@@ -322,7 +325,17 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
                 startActivity(displayResult);
             }
         });
-
+        getAQI.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent disp = new Intent(getApplicationContext(),AQIDisplay.class);
+                disp.putExtra(STATE_AND_CITY, centreName);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(JSON, (Serializable)(mJsontodata.queries));
+                disp.putExtras(bundle);
+                startActivity(disp);
+            }
+        });
         //LinearLayout mLinearLayout = (LinearLayout) findViewById(R.id.fragment_container);
 
     }
