@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -44,7 +45,7 @@ public class AQIDisplay extends ActionBarActivity {
     Bitmap myOriginalImage,overLayPin;
     AQI mAqi = new AQI();
     TextView mTextView;
-
+    double ratio;
     //HashMap<String,Double> pollutants;
 
 
@@ -89,12 +90,27 @@ public class AQIDisplay extends ActionBarActivity {
                 }
                 else{
                     Log.d("max is more than index",max+"");
-                    mTextView.setText("AQI is: "+ max);
+                    //mTextView.setText("AQI is: "+ max);
                 }
 
             }
+            mTextView.setText("AQI is: "+ max);
+            Display disp = getWindowManager().getDefaultDisplay();
+            int w = mImageView.getWidth();
+            int h = mImageView.getHeight();
+            ratio = max/350 * h ;
+
+            overLayPin = BitmapFactory.decodeResource(getResources(), R.drawable.ic_action_place);  //BMP(GREY COLOR) TO DISPLAY OUR LOCATION
+            BitmapFactory.Options opt = new BitmapFactory.Options();
+            opt.inMutable = true;
+            myOriginalImage = BitmapFactory.decodeResource(getResources(), R.drawable.aqi_bar,opt);
+            Canvas canvas = new Canvas(myOriginalImage);
+            Paint paint = new Paint();
 
 
+            canvas.drawBitmap(overLayPin,  (float)mImageView.getTop(),(float)ratio, paint);
+
+            mImageView.setImageBitmap(myOriginalImage);
 
             //display.append(document.html());
 
@@ -106,7 +122,7 @@ public class AQIDisplay extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aqi);
         mTextView = (TextView)findViewById(R.id.aqi);
-
+        mImageView = (ImageView)findViewById(R.id.bar);
         mTextView.setText("Calculating AQI, wait... ");
         mToolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(mToolbar);
@@ -158,21 +174,19 @@ public class AQIDisplay extends ActionBarActivity {
         Intent mIntent = getIntent();
         String centreName = mIntent.getStringExtra(MainActivity.STATE_AND_CITY);
         String[] cityAndCentre=null;
-        cityAndCentre = centreName.split(": ");
+        if(centreName.contains(": ")) {
+            cityAndCentre = centreName.split(": ");
 
-        myQuery = query.get(cityAndCentre[1]);
+            myQuery = query.get(cityAndCentre[1]);
+        }else{
+            myQuery = query.get(centreName);
+        }
 //        Log.d("query",cityAndCentre[1]);
          new ReadWebpageContents().execute(myQuery);
-        mImageView = (ImageView)findViewById(R.id.bar);
-        BitmapFactory.Options opt = new BitmapFactory.Options();
-        opt.inMutable = true;
-        overLayPin = BitmapFactory.decodeResource(getResources(), R.drawable.ic_action_place);  //BMP(GREY COLOR) TO DISPLAY OUR LOCATION
-        myOriginalImage = BitmapFactory.decodeResource(getResources(), R.drawable.aqi_bar,opt);
-        Canvas canvas = new Canvas(myOriginalImage);
-        Paint paint = new Paint();
-        //canvas.drawBitmap(overLayPin, (float)coordinatesOfPins[i][0]-25, (float)coordinatesOfPins[i][1]-100, paint);
-        mImageView.setImageBitmap(myOriginalImage);
 
+
+        myOriginalImage = BitmapFactory.decodeResource(getResources(), R.drawable.aqi_bar);
+        mImageView.setImageBitmap(myOriginalImage);
 
     }
 

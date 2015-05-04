@@ -33,6 +33,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolygonOptions;
 import com.nispok.snackbar.Snackbar;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -105,29 +106,18 @@ public class LocationBased extends ActionBarActivity implements LocationListener
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(
                 new LatLng(location.getLatitude(), location.getLongitude()), 11));
 
-        map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-                                             @Override
-                                             public void onInfoWindowClick(Marker marker) {
 
-                                                 if (marker.getTitle().equals("Your Current Position")) {
-                                                     Toast.makeText(LocationBased.this, marker.getTitle(), Toast.LENGTH_LONG).show();
-                                                     Intent student_ctr = new Intent(LocationBased.this, AQI.class);
-                                                     startActivity(student_ctr);
-
-                                                 }
-
-                                             }
-                                         }
-
-        );
         Collections.sort(mJsontodata.mLocations,new Compare());
+        ArrayList<Marker> markers = new ArrayList<>();
         for(int i=0;i<3&&i<mJsontodata.mLocations.size();i++){
             latLng = new LatLng(mJsontodata.mLocations.get(i).getLatitude(), mJsontodata.mLocations.get(i).getLongitude());
+            //Marker  marker =  new Marker();
             map.addMarker(new MarkerOptions()
                     .position(latLng)
-                    .title("Nearest Location #"+(i+1)+": "+mJsontodata.latLngMap.get(mJsontodata.mLocations.get(i))+"\nDistance: "
-                    +location.distanceTo(mJsontodata.mLocations.get(i)))
+                    .title("Nearest Location #" + (i + 1) + ": " + mJsontodata.latLngMap.get(mJsontodata.mLocations.get(i)) + ": Distance: "
+                            + location.distanceTo(mJsontodata.mLocations.get(i)))
                     .draggable(false));
+            //markers.add(marker);
         }
         Snackbar.with(getApplicationContext())
                 .duration(Snackbar.SnackbarDuration.LENGTH_LONG)// context
@@ -158,6 +148,26 @@ public class LocationBased extends ActionBarActivity implements LocationListener
     public void onStatusChanged(String provider, int status, Bundle extras) {
 
     }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                String T = marker.getTitle();
+                String[] t = T.split(": ");
+                //String[] t1 = t[1].split("Distance:");
+                Log.d("centre",t[1]);
+                Intent intent = new Intent(getApplicationContext(),AQIDisplay.class);
+                intent.putExtra(MainActivity.STATE_AND_CITY,t[1]);
+                startActivity(intent);
+
+
+            }
+        });
+    }
+
 
     @Override
     public void onProviderEnabled(String provider) {

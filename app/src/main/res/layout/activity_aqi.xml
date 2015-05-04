@@ -9,7 +9,7 @@
 
 
     <TextView
-        android:background="@color/RoyalBlue"
+        android:background="@color/card_activated_kitkat"
         android:layout_marginTop="30dp"
         android:layout_gravity="center_horizontal"
         android:textColor="@color/Black"
