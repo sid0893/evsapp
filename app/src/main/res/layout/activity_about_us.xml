@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    xmlns:card="http://schemas.android.com/apk/res-auto" >
+    xmlns:card="http://schemas.android.com/apk/res-auto">
 
     <it.gmariotti.cardslib.library.view.CardListView
         android:id="@+id/myList"
@@ -11,6 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         card:list_card_layout_resourceID="@layout/list_card_thumbnail_layout"
-        style="@style/list_card.thumbnail"/>
+        style="@style/list_card.thumbnail" />
 
 </LinearLayout>

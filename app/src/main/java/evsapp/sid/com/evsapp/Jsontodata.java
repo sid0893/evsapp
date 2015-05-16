@@ -1,33 +1,21 @@
 package evsapp.sid.com.evsapp;
 
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.location.Location;
-import android.support.annotation.StringRes;
 import android.util.Log;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.Response.ErrorListener;
-import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 import evsapp.sid.com.evsapp.Utils.VolleySingleton;
 
@@ -39,15 +27,17 @@ public class Jsontodata {
     private final static String TAG = "JSON_TO_DATABASE";
     private static final String url = "https://api.myjson.com/bins/12uj1";
     private Context context;
-    HashMap<String,String> queries;
-    HashMap<Location,String> latLngMap;
+    HashMap<String, String> queries;
+    HashMap<Location, String> latLngMap;
     ArrayList<Location> mLocations;
+
     public Jsontodata(Context context) {
         this.context = context;
 
 
     }
-    public  void startDataDownload(){
+
+    public void startDataDownload() {
         fetchPlaces(url);
     }
 
@@ -108,11 +98,11 @@ public class Jsontodata {
             @Override
             public void onResponse(JSONArray response) {
                 try {
-                    queries = new HashMap<String,String>();
-                    latLngMap = new HashMap<Location,String>();
+                    queries = new HashMap<String, String>();
+                    latLngMap = new HashMap<Location, String>();
                     mLocations = new ArrayList<>();
 
-                    for (int i = 0; i <= response.length()+1; i++) {
+                    for (int i = 0; i <= response.length() + 1; i++) {
 
                         JSONObject place = (JSONObject) response.get(i);
 
@@ -125,10 +115,11 @@ public class Jsontodata {
                         Double longitude = latlng.getDouble("longitude");
                         //LatLng latLng1 = new LatLng(latitude,longitude);
                         Location latlng1 = new Location("");
-                        latlng1.setLatitude(latitude);latlng1.setLongitude(longitude);
-                        Log.d(TAG,  " centre: " + centre_name + " query: " + query + " latlng :" + latitude + "," + longitude);
-                        queries.put(centre_name,query);
-                        latLngMap.put(latlng1,centre_name);
+                        latlng1.setLatitude(latitude);
+                        latlng1.setLongitude(longitude);
+                        Log.d(TAG, " centre: " + centre_name + " query: " + query + " latlng :" + latitude + "," + longitude);
+                        queries.put(centre_name, query);
+                        latLngMap.put(latlng1, centre_name);
                         mLocations.add(latlng1);
                         // Place temp = new Place(state_name,city_name,centre_name,query,latitude,longitude);
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
 
         <item name="android:colorPrimary">@color/Crimson</item>
@@ -11,13 +12,12 @@
         <item name="android:dropDownListViewStyle">@style/SpinnerDropDown</item>
 
     </style>
-    
+
     <style name="SpinnerDropDown" parent="android:Widget.ListView.DropDown">
         <item name="android:divider">@android:color/darker_gray</item>
         <item name="android:textColor">@android:color/holo_blue_light</item>
         <item name="android:dividerHeight">2sp</item>
     </style>
-
 
 
     <style name="Button" parent="android:style/Widget.Material.Button">
@@ -41,10 +41,6 @@
     </style>
 
     <style name="TableTextViewStyle" parent="TextAppearance.AppCompat">
-
-
-
-
 
 
     </style>

@@ -4,8 +4,6 @@ package evsapp.sid.com.evsapp;
  * Created by hp on 07-04-2015.
  */
 
-import android.app.Activity;
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.location.LocationManager;

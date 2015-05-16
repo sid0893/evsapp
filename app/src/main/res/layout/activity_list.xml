@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#d3d3d3"
-    xmlns:card="http://schemas.android.com/apk/res-auto" >
+    xmlns:card="http://schemas.android.com/apk/res-auto">
 
     <include
         android:id="@+id/tool_bar"
@@ -16,6 +16,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         card:list_card_layout_resourceID="@layout/list_card_thumbnail_layout"
-        style="@style/card_external"/>
+        style="@style/card_external" />
 
 </LinearLayout>

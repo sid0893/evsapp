@@ -1,7 +1,5 @@
 package evsapp.sid.com.evsapp;
 
-import android.support.v7.app.ActionBarActivity;
-
 import java.util.HashMap;
 
 /**
@@ -11,7 +9,7 @@ public class AQI {
 
     HashMap<String, double[]> map = new HashMap<>();
 
-    public AQI(){
+    public AQI() {
         initialisemap();
     }
 
@@ -26,14 +24,14 @@ public class AQI {
 
     }
 
-    public int getAQI(double I_low, double I_high, double C_low, double C_high, double C){
-        return (int)(((I_high - I_low)/(C_high - C_low))*(C - C_low) + I_low);
+    public int getAQI(double I_low, double I_high, double C_low, double C_high, double C) {
+        return (int) (((I_high - I_low) / (C_high - C_low)) * (C - C_low) + I_low);
 
     }
 
-    public int getIndex(String str,double val){
-        double high=0,low=0,I_high=0,I_low=0;
-        for(int i=0;i<7;i++) {
+    public int getIndex(String str, double val) {
+        double high = 0, low = 0, I_high = 0, I_low = 0;
+        for (int i = 0; i < 7; i++) {
             if (map.containsKey(str)) {
                 if (map.get(str)[i] >= val) {
                     high = map.get(str)[i];

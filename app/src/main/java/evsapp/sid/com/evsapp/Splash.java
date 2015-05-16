@@ -40,11 +40,12 @@ public class Splash extends Activity {
         }, SPLASH_TIME_OUT);
 
     }
+
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        if(hasFocus){
-               backAnimation.start();
+        if (hasFocus) {
+            backAnimation.start();
         }
     }
 

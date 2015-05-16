@@ -6,5 +6,5 @@
         android:orderInCategory="1"
         android:showAsAction="always|ifRoom"
         android:title="@string/action_settings"
-        android:menuCategory="secondary"/>
+        android:menuCategory="secondary" />
 </menu>

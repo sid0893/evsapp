@@ -3,12 +3,8 @@ package evsapp.sid.com.evsapp;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.graphics.drawable.AnimationDrawable;
-import android.location.Location;
-import android.location.LocationListener;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -24,20 +20,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import org.apache.http.protocol.HTTP;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-
 import static android.widget.AdapterView.OnItemSelectedListener;
-
 
 
 public class MainActivity extends ActionBarActivity implements OnItemSelectedListener {
@@ -46,7 +36,7 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
     int[] navDrawerIcons;
     DrawerLayout mDrawerLayout;
     //ListView mListView;
-    HashMap<String,ArrayList<String>> stateToCity;
+    HashMap<String, ArrayList<String>> stateToCity;
     //HashMap<String,ArrayList<String>> cityToDistrict = new HashMap<>();
     RecyclerView mRecyclerView;
     RecyclerView.Adapter mAdapter;
@@ -61,7 +51,7 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
     Spinner stateList, cityList;
     Button getPollutionData = null;
     Button getAQI = null;
-    ArrayAdapter<CharSequence> mStateArrayAdapter = null, mCityArrayAdapter = null ;
+    ArrayAdapter<CharSequence> mStateArrayAdapter = null, mCityArrayAdapter = null;
     ArrayList<String> cities = null;
     ArrayList<String> districts = null;
     ArrayList<String> delhi = null;
@@ -74,8 +64,8 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
     ArrayList<String> karnataka = null;
     ArrayList<String> maharashtra = null;
     ArrayList<String> tamil_nadu = null;
-    String centreName=null;
-    public static Jsontodata mJsontodata=null;
+    String centreName = null;
+    public static Jsontodata mJsontodata = null;
 
 //    ArrayList<String> NewDelhi = null;
 //    ArrayList<String> Agra=null,Lucknow=null,Kanpur=null,Varanasi=null;
@@ -85,8 +75,6 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
 //    ArrayList<String> Bangalore = null;
 //    ArrayList<String> Mumbai=null,Chandrapur=null;
 //    ArrayLsist<String> Chennai = null;
-
-
 
 
     @Override
@@ -101,19 +89,20 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
                 break;
 
             case R.id.city_list: /*display.setText("city selected");*/
-                centreName= parent.getSelectedItem().toString();
+                centreName = parent.getSelectedItem().toString();
 
                 //Log.d("select city",s1);
                 break;
         }
 
     }
+
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
 
-//    private void setDistrictList(String city){
+    //    private void setDistrictList(String city){
 //        districts.clear();
 //        districts.addAll(cityToDistrict.get(city));
 //        /*switch (position) {
@@ -151,11 +140,11 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
     private void setCityList(String state) {
 
         //cities.clear();
-        Log.d("state"," "+state);
+        Log.d("state", " " + state);
 
-        int resourceId= getResources().getIdentifier(state, "array", getPackageName());
-        Log.d("res id",""+resourceId);
-        mCityArrayAdapter = ArrayAdapter.createFromResource(this,resourceId,R.layout.spinner);
+        int resourceId = getResources().getIdentifier(state, "array", getPackageName());
+        Log.d("res id", "" + resourceId);
+        mCityArrayAdapter = ArrayAdapter.createFromResource(this, resourceId, R.layout.spinner);
         //Resources.getSystem().getIdentifier()
         mCityArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         cityList.setAdapter(mCityArrayAdapter);
@@ -192,32 +181,32 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
         //mCityArrayAdapter.notifyDataSetChanged();
     }
 
-    private void initialiseStates(){
+    private void initialiseStates() {
 
         delhi = new ArrayList<>(Arrays.asList("Delhi : D.C.E.", "Delhi : Shadipur", "Delhi : I.T.O.", "Delhi : Dilshad Garden",
-                "Delhi : Dwarka","Delhi : Punjabi Bagh","Delhi : I.G.I Airport",
-                "Delhi : I.S.B.T. Anand Vihar","Delhi : Mandir Marg","Delhi : Civil Lines","Delhi : R.K. Puram"));
-        stateToCity.put("DELHI",delhi);
+                "Delhi : Dwarka", "Delhi : Punjabi Bagh", "Delhi : I.G.I Airport",
+                "Delhi : I.S.B.T. Anand Vihar", "Delhi : Mandir Marg", "Delhi : Civil Lines", "Delhi : R.K. Puram"));
+        stateToCity.put("DELHI", delhi);
         uttar_pradesh = new ArrayList<>(Arrays.asList("Agra : Sanjay Palace", "Lucknow : Talkatora",
-                "Lucknow : Lalbagh","Lucknow : Central School","Kanpur : Central School",
+                "Lucknow : Lalbagh", "Lucknow : Central School", "Kanpur : Central School",
                 "Varanasi : Ardhali Bazar"));
-        stateToCity.put("UTTAR-PRADESH",uttar_pradesh);
+        stateToCity.put("UTTAR-PRADESH", uttar_pradesh);
         telangana = new ArrayList<>(Arrays.asList("Hyderabad : SanathNagar"));
-        stateToCity.put("TELANGANA",telangana);
+        stateToCity.put("TELANGANA", telangana);
         //bihar = new ArrayList<>(Arrays.asList("Patna"));
         gujarat = new ArrayList<>(Arrays.asList("Ahmedabad : Maninagar"));
-        stateToCity.put("GUJARAT",gujarat);
+        stateToCity.put("GUJARAT", gujarat);
         haryana = new ArrayList<>(Arrays.asList("Faridabad : Sector16A Faridabad"));
-        stateToCity.put("HARYANA",haryana);
-        karnataka = new ArrayList<>(Arrays.asList("Bangalore : BTM","Bangalore : Peenya",
+        stateToCity.put("HARYANA", haryana);
+        karnataka = new ArrayList<>(Arrays.asList("Bangalore : BTM", "Bangalore : Peenya",
                 "Bangalore : BWSSB Kadabesanahalli"));
-        stateToCity.put("KARNATAKA",karnataka);
+        stateToCity.put("KARNATAKA", karnataka);
         maharashtra = new ArrayList<>(Arrays.asList("Mumbai : Navi Mumbai Municipal Corporation AIROLI",
                 "Chandrapur : Chandrapur"));
-        stateToCity.put("MAHARASHTRA",maharashtra);
+        stateToCity.put("MAHARASHTRA", maharashtra);
         tamil_nadu = new ArrayList<>(Arrays.asList("Chennai : Alandur Bus Depot",
-                "Chennai : IIT","Chennai : Manali"));
-        stateToCity.put("TAMIL-NADU",tamil_nadu);
+                "Chennai : IIT", "Chennai : Manali"));
+        stateToCity.put("TAMIL-NADU", tamil_nadu);
         cities.addAll(telangana);
         mCityArrayAdapter.notifyDataSetChanged();
     }
@@ -263,7 +252,7 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
         stateList.setAdapter(mStateArrayAdapter);
 
         //mCityArrayAdapter = new ArrayAdapter(this, R.layout.spinner, cities);
-        mCityArrayAdapter = ArrayAdapter.createFromResource(this,R.array.telangana,R.layout.spinner);
+        mCityArrayAdapter = ArrayAdapter.createFromResource(this, R.array.telangana, R.layout.spinner);
         mCityArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         cityList.setAdapter(mCityArrayAdapter);
 
@@ -319,8 +308,8 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         getPollutionData = (Button) findViewById(R.id.buttonGetData);
-        getAQI = (Button)findViewById(R.id.buttonGetAQI);
-        stateToCity= new HashMap<>();
+        getAQI = (Button) findViewById(R.id.buttonGetAQI);
+        stateToCity = new HashMap<>();
         //cityToDistrict = new HashMap<>();
 
         //initialiseStates();
@@ -331,13 +320,12 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
             @Override
             public void onClick(View v) {
                 //String[] stateAndCity = new String[]{stateList.getSelectedItem().toString(), cityList.getSelectedItem().toString()};
-                if(isNetworkConnected()) {
+                if (isNetworkConnected()) {
                     Intent displayResult = new Intent(getApplicationContext(), DisplayResult.class);
                     displayResult.putExtra(STATE_AND_CITY, centreName);
                     startActivity(displayResult);
-                }
-                else{
-                    Toast mToast = Toast.makeText(getApplicationContext(),"Please Connect to internet",Toast.LENGTH_SHORT);
+                } else {
+                    Toast mToast = Toast.makeText(getApplicationContext(), "Please Connect to internet", Toast.LENGTH_SHORT);
                     mToast.show();
                 }
             }
@@ -345,13 +333,12 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
         getAQI.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isNetworkConnected()) {
+                if (isNetworkConnected()) {
                     Intent disp = new Intent(getApplicationContext(), AQIDisplay.class);
                     disp.putExtra(STATE_AND_CITY, centreName);
                     startActivity(disp);
-                }
-                else{
-                    Toast mToast = Toast.makeText(getApplicationContext(),"Please Connect to internet",Toast.LENGTH_SHORT);
+                } else {
+                    Toast mToast = Toast.makeText(getApplicationContext(), "Please Connect to internet", Toast.LENGTH_SHORT);
                     mToast.show();
                 }
             }
@@ -359,6 +346,7 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
         //LinearLayout mLinearLayout = (LinearLayout) findViewById(R.id.fragment_container);
 
     }
+
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo ni = cm.getActiveNetworkInfo();

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="evsapp.sid.com.evsapp" >
+    package="evsapp.sid.com.evsapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -22,11 +22,11 @@
         android:allowBackup="true"
         android:icon="@drawable/evs"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".Splash"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme">
 
             <!--
             <intent-filter>
@@ -39,8 +39,8 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait" >
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -51,7 +51,7 @@
             android:name=".DisplayResult"
             android:label="@string/title_activity_display_result"
             android:parentActivityName=".MainActivity"
-            android:screenOrientation="landscape" >
+            android:screenOrientation="landscape">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="evsapp.sid.com.evsapp.MainActivity" />
@@ -64,7 +64,7 @@
         <activity
             android:name=".AboutUs"
             android:label="@string/title_activity_about_us"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="evsapp.sid.com.evsapp.MainActivity" />
@@ -82,7 +82,7 @@
             android:name=".AQIDisplay"
             android:screenOrientation="landscape"
             android:label="@string/title_activity_aqidisplay"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="evsapp.sid.com.evsapp.MainActivity" />

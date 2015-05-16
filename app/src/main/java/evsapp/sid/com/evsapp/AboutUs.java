@@ -1,7 +1,5 @@
 package evsapp.sid.com.evsapp;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
@@ -20,6 +18,7 @@ import it.gmariotti.cardslib.library.view.CardListView;
 public class AboutUs extends ActionBarActivity {
 
     Toolbar mToolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
@@ -38,8 +37,8 @@ public class AboutUs extends ActionBarActivity {
                 R.drawable.steve, R.drawable.bill, R.drawable.mark};
 
         ArrayList<Card> cards = new ArrayList<Card>();
-        String[] names = new String[]{"Manan Wason","Siddharth Jain","Abhishek Jain","Priyanshu Singh","Hammad Akhtar"};
-        for (int i = 0; i<5; i++) {
+        String[] names = new String[]{"Manan Wason", "Siddharth Jain", "Abhishek Jain", "Priyanshu Singh", "Hammad Akhtar"};
+        for (int i = 0; i < 5; i++) {
             // Create a Card
             Card card = new Card(this);
             // Create a CardHeader

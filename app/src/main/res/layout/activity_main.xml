@@ -1,52 +1,51 @@
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools" android:id="@+id/drawer_layout"
-android:layout_width="match_parent" android:layout_height="match_parent"
-tools:context=".MainActivity">
-
-
-<LinearLayout android:id="@+id/fragment_container"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center_horizontal"
-    >
-
-    <Spinner
-        android:theme="@android:style/Widget.Holo.Spinner"
-        android:id="@+id/states_list"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80sp"
-        />
-    <Spinner
-        android:theme="@android:style/Widget.Holo.Spinner"
-        android:id="@+id/city_list"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80sp"
-    />
-
-    <Button
-        android:theme="@android:style/Widget.Holo.Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_get_data"
-        android:id="@+id/buttonGetData"
-        android:layout_marginTop="50sp"
-    />
-
-</LinearLayout>
-
-<ListView android:id="@+id/left_drawer"
-    android:layout_width="240dp"
-    android:layout_height="match_parent"
-    android:layout_gravity="start"
-    android:choiceMode="singleChoice"
-    android:divider="#287AA9"
-    android:background="#111"
-    android:dividerHeight="1dp"/>
+    tools:context=".MainActivity">
 
 
+    <LinearLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <Spinner
+            android:theme="@android:style/Widget.Holo.Spinner"
+            android:id="@+id/states_list"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80sp" />
+
+        <Spinner
+            android:theme="@android:style/Widget.Holo.Spinner"
+            android:id="@+id/city_list"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80sp" />
+
+        <Button
+            android:theme="@android:style/Widget.Holo.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_get_data"
+            android:id="@+id/buttonGetData"
+            android:layout_marginTop="50sp" />
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/left_drawer"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:choiceMode="singleChoice"
+        android:divider="#287AA9"
+        android:background="#111"
+        android:dividerHeight="1dp" />
 
 
 </android.support.v4.widget.DrawerLayout>

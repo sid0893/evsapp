@@ -1,47 +1,28 @@
-
 package evsapp.sid.com.evsapp;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.LocationSource;
 import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.PolygonOptions;
 import com.nispok.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by manan on 17-04-2015.
@@ -53,7 +34,7 @@ public class LocationBased extends ActionBarActivity implements LocationListener
     Toolbar mToolbar;
     private GoogleMap map; // Might be null if Google Play services APK is not available.
     Jsontodata mJsontodata;
-    Location mLocation=null;
+    Location mLocation = null;
 
     public class Compare implements Comparator<Location> {
 
@@ -61,7 +42,7 @@ public class LocationBased extends ActionBarActivity implements LocationListener
         public int compare(Location lhs, Location rhs) {
             float a = mLocation.distanceTo(lhs);
             float b = mLocation.distanceTo(rhs);
-            return (int)(a-b);
+            return (int) (a - b);
         }
     }
 
@@ -91,8 +72,8 @@ public class LocationBased extends ActionBarActivity implements LocationListener
                 .getMap();
 
 
-
     }
+
     @Override
     public void onLocationChanged(final Location location) {
         map.clear();
@@ -106,23 +87,24 @@ public class LocationBased extends ActionBarActivity implements LocationListener
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(
                 new LatLng(location.getLatitude(), location.getLongitude()), 11));
 
-
-        Collections.sort(mJsontodata.mLocations,new Compare());
-        ArrayList<Marker> markers = new ArrayList<>();
-        for(int i=0;i<3&&i<mJsontodata.mLocations.size();i++){
-            latLng = new LatLng(mJsontodata.mLocations.get(i).getLatitude(), mJsontodata.mLocations.get(i).getLongitude());
-            //Marker  marker =  new Marker();
-            map.addMarker(new MarkerOptions()
-                    .position(latLng)
-                    .title("Nearest Location #" + (i + 1) + ": " + mJsontodata.latLngMap.get(mJsontodata.mLocations.get(i)) + ": Distance: "
-                            + location.distanceTo(mJsontodata.mLocations.get(i)))
-                    .draggable(false));
-            //markers.add(marker);
+        if(mJsontodata.mLocations!=null) {
+            Collections.sort(mJsontodata.mLocations, new Compare());
+            //ArrayList<Marker> markers = new ArrayList<>();
+            for (int i = 0; i < 3 && i < mJsontodata.mLocations.size(); i++) {
+                latLng = new LatLng(mJsontodata.mLocations.get(i).getLatitude(), mJsontodata.mLocations.get(i).getLongitude());
+                //Marker  marker =  new Marker();
+                map.addMarker(new MarkerOptions()
+                        .position(latLng)
+                        .title("Nearest Location #" + (i + 1) + ": " + mJsontodata.latLngMap.get(mJsontodata.mLocations.get(i)) + ": Distance: "
+                                + location.distanceTo(mJsontodata.mLocations.get(i)))
+                        .draggable(false));
+                //markers.add(marker);
+            }
+            Snackbar.with(getApplicationContext())
+                    .duration(Snackbar.SnackbarDuration.LENGTH_LONG)// context
+                    .text("Select one from the nearest 3 locations") // text to display
+                    .show(this); // activity where it is displayed
         }
-        Snackbar.with(getApplicationContext())
-                .duration(Snackbar.SnackbarDuration.LENGTH_LONG)// context
-                .text("Select one from the nearest 3 locations") // text to display
-                .show(this); // activity where it is displayed
 
 
     }
@@ -150,7 +132,7 @@ public class LocationBased extends ActionBarActivity implements LocationListener
     }
 
     @Override
-    protected void onStart(){
+    protected void onStart() {
         super.onStart();
         map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
@@ -158,9 +140,9 @@ public class LocationBased extends ActionBarActivity implements LocationListener
                 String T = marker.getTitle();
                 String[] t = T.split(": ");
                 //String[] t1 = t[1].split("Distance:");
-                Log.d("centre",t[1]);
-                Intent intent = new Intent(getApplicationContext(),AQIDisplay.class);
-                intent.putExtra(MainActivity.STATE_AND_CITY,t[1]);
+                Log.d("centre", t[1]);
+                Intent intent = new Intent(getApplicationContext(), AQIDisplay.class);
+                intent.putExtra(MainActivity.STATE_AND_CITY, t[1]);
                 startActivity(intent);
 
 

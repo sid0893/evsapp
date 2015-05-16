@@ -7,13 +7,13 @@
     android:id="@+id/disp_ll"
 
     tools:context="evsapp.sid.com.evsapp.DisplayResult">
-   <!-- <android.support.v7.widget.Toolbar
-        android:id="@+id/disp_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/DodgerBlue"
-        app:theme = "@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>-->
+    <!-- <android.support.v7.widget.Toolbar
+         android:id="@+id/disp_toolbar"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:background="@color/DodgerBlue"
+         app:theme = "@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>-->
     <include
         android:id="@+id/tool_bar"
         layout="@layout/tool_bar"></include>
@@ -24,82 +24,77 @@
         android:id="@+id/myTable"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <!--<TextView
-        android:id="@+id/resultDisplay"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:layout_marginTop="2dip"
-        android:gravity="center"
-        android:textColor="@color/MidnightBlue"
-        android:background="@android:color/darker_gray"
-        android:maxLines="1"
-        android:textAppearance="?android:textAppearanceMedium"
-        />-->
-    <ScrollView
-        android:id="@+id/scrollview"
-        android:layout_height="match_parent"
-        android:scrollbars="horizontal|vertical"
-        android:layout_width="match_parent"
-        android:layout_marginTop="2dip"
-        android:scrollbarStyle="insideOverlay"
-        android:fillViewport="true"
-        >
-
-
-
-    <TableLayout
-        android:id="@+id/displaytable"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        >
-
-        <TableRow
-            android:id="@+id/display_row"
-
-            android:paddingTop="3dp"
-            android:paddingBottom="3dp"
-            android:background="@color/RoyalBlue"
+        <!--<TextView
+            android:id="@+id/resultDisplay"
             android:layout_width="match_parent"
-            android:elevation="15dp">
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginTop="2dip"
+            android:gravity="center"
+            android:textColor="@color/MidnightBlue"
+            android:background="@android:color/darker_gray"
+            android:maxLines="1"
+            android:textAppearance="?android:textAppearanceMedium"
+            />-->
+        <ScrollView
+            android:id="@+id/scrollview"
+            android:layout_height="match_parent"
+            android:scrollbars="horizontal|vertical"
+            android:layout_width="match_parent"
+            android:layout_marginTop="2dip"
+            android:scrollbarStyle="insideOverlay"
+            android:fillViewport="true">
 
-            <TextView
-                android:textStyle="italic"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/White"
+
+            <TableLayout
+                android:id="@+id/displaytable"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Parameters"
-                android:gravity="center"
-                android:layout_weight="1"
-                />
 
-            <TextView
-                android:textStyle="italic"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/White"
-                android:layout_height="match_parent"
-                android:text="Concentration"
-                android:gravity="center"
-                android:layout_weight="1"
-               />
+                >
 
-            <TextView
+                <TableRow
+                    android:id="@+id/display_row"
 
-                android:textStyle="italic"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/White"
-                android:layout_height="match_parent"
-                android:text="Concentration(24 hours)/Prescribed"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:layout_margin="2dip"
-                />
-        </TableRow>
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp"
+                    android:background="@color/RoyalBlue"
+                    android:layout_width="match_parent"
+                    android:elevation="15dp">
 
-    </TableLayout>
+                    <TextView
+                        android:textStyle="italic"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/White"
+                        android:layout_height="match_parent"
+                        android:text="Parameters"
+                        android:gravity="center"
+                        android:layout_weight="1" />
 
-    </ScrollView>
+                    <TextView
+                        android:textStyle="italic"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/White"
+                        android:layout_height="match_parent"
+                        android:text="Concentration"
+                        android:gravity="center"
+                        android:layout_weight="1" />
+
+                    <TextView
+
+                        android:textStyle="italic"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/White"
+                        android:layout_height="match_parent"
+                        android:text="Concentration(24 hours)/Prescribed"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layout_margin="2dip" />
+                </TableRow>
+
+            </TableLayout>
+
+        </ScrollView>
     </LinearLayout>
 
 </LinearLayout>

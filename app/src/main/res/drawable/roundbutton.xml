@@ -13,8 +13,7 @@
         android:height="85dp"/>
 </shape>-->
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="@color/DodgerBlue"
-    >
+    android:color="@color/DodgerBlue">
     <item>
         <shape xmlns:android="http://schemas.android.com/apk/res/android">
             <corners android:radius="1dp" />
