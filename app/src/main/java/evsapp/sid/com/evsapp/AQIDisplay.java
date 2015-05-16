@@ -162,7 +162,7 @@ public class AQIDisplay extends ActionBarActivity {
         query.put("Maninagar","http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Maninagar&StateId=8&CityId=337");
         query.put("Navi Mumbai Municipal Corporation AIROLI","http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=NMMC%20Airoli&StateId=16&CityId=310");
         query.put("Chandrapur","http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Chandrapur&StateId=16&CityId=329");
-        query.put("Sanathnagar","http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Hyderabad&StateId=1&CityId=7");
+        query.put("SanathNagar","http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Hyderabad&StateId=1&CityId=7");
         query.put("BTM","http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=BTM&StateId=13&CityId=136");
         query.put("Peenya","http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=Peenya&StateId=13&CityId=136");
         query.put("BWSSB Kadabesanahalli","http://www.cpcb.gov.in/CAAQM/frmCurrentDataNew.aspx?StationName=BWSSB&StateId=13&CityId=136");
@@ -178,6 +178,7 @@ public class AQIDisplay extends ActionBarActivity {
             cityAndCentre = centreName.split(": ");
 
             myQuery = query.get(cityAndCentre[1]);
+            Log.d(cityAndCentre[1],myQuery);
         }else{
             myQuery = query.get(centreName);
         }

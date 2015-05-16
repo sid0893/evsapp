@@ -5,9 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.drawable.AnimationDrawable;
 import android.location.Location;
 import android.location.LocationListener;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -23,6 +26,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import org.apache.http.protocol.HTTP;
 
@@ -146,8 +150,16 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
 //    }
     private void setCityList(String state) {
 
-        cities.clear();
-        cities.addAll(stateToCity.get(state));
+        //cities.clear();
+        Log.d("state"," "+state);
+
+        int resourceId= getResources().getIdentifier(state, "array", getPackageName());
+        Log.d("res id",""+resourceId);
+        mCityArrayAdapter = ArrayAdapter.createFromResource(this,resourceId,R.layout.spinner);
+        //Resources.getSystem().getIdentifier()
+        mCityArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        cityList.setAdapter(mCityArrayAdapter);
+        //cities.addAll(stateToCity.get(state));
 //        switch (position) {
 //            case 0:
 //                cities.addAll(telangana);
@@ -177,7 +189,7 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
 //        }
 
         //mCityArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mCityArrayAdapter.notifyDataSetChanged();
+        //mCityArrayAdapter.notifyDataSetChanged();
     }
 
     private void initialiseStates(){
@@ -189,7 +201,7 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
         uttar_pradesh = new ArrayList<>(Arrays.asList("Agra : Sanjay Palace", "Lucknow : Talkatora",
                 "Lucknow : Lalbagh","Lucknow : Central School","Kanpur : Central School",
                 "Varanasi : Ardhali Bazar"));
-        stateToCity.put("UTTAR PRADESH",uttar_pradesh);
+        stateToCity.put("UTTAR-PRADESH",uttar_pradesh);
         telangana = new ArrayList<>(Arrays.asList("Hyderabad : SanathNagar"));
         stateToCity.put("TELANGANA",telangana);
         //bihar = new ArrayList<>(Arrays.asList("Patna"));
@@ -205,7 +217,7 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
         stateToCity.put("MAHARASHTRA",maharashtra);
         tamil_nadu = new ArrayList<>(Arrays.asList("Chennai : Alandur Bus Depot",
                 "Chennai : IIT","Chennai : Manali"));
-        stateToCity.put("TAMIL NADU",tamil_nadu);
+        stateToCity.put("TAMIL-NADU",tamil_nadu);
         cities.addAll(telangana);
         mCityArrayAdapter.notifyDataSetChanged();
     }
@@ -250,7 +262,8 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
         mStateArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         stateList.setAdapter(mStateArrayAdapter);
 
-        mCityArrayAdapter = new ArrayAdapter(this, R.layout.spinner, cities);
+        //mCityArrayAdapter = new ArrayAdapter(this, R.layout.spinner, cities);
+        mCityArrayAdapter = ArrayAdapter.createFromResource(this,R.array.telangana,R.layout.spinner);
         mCityArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         cityList.setAdapter(mCityArrayAdapter);
 
@@ -267,6 +280,7 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main1);
+        initialiseDropDownMenus();
         mTitle = getTitle();
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mToolbar = (Toolbar) findViewById(R.id.tool_bar);
@@ -308,8 +322,8 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
         getAQI = (Button)findViewById(R.id.buttonGetAQI);
         stateToCity= new HashMap<>();
         //cityToDistrict = new HashMap<>();
-        initialiseDropDownMenus();
-        initialiseStates();
+
+        //initialiseStates();
         //initialiseCities();
 
 
@@ -317,22 +331,42 @@ public class MainActivity extends ActionBarActivity implements OnItemSelectedLis
             @Override
             public void onClick(View v) {
                 //String[] stateAndCity = new String[]{stateList.getSelectedItem().toString(), cityList.getSelectedItem().toString()};
-                Intent displayResult = new Intent(getApplicationContext(), DisplayResult.class);
-                displayResult.putExtra(STATE_AND_CITY, centreName);
-
-                startActivity(displayResult);
+                if(isNetworkConnected()) {
+                    Intent displayResult = new Intent(getApplicationContext(), DisplayResult.class);
+                    displayResult.putExtra(STATE_AND_CITY, centreName);
+                    startActivity(displayResult);
+                }
+                else{
+                    Toast mToast = Toast.makeText(getApplicationContext(),"Please Connect to internet",Toast.LENGTH_SHORT);
+                    mToast.show();
+                }
             }
         });
         getAQI.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent disp = new Intent(getApplicationContext(),AQIDisplay.class);
-                disp.putExtra(STATE_AND_CITY, centreName);
-                startActivity(disp);
+                if(isNetworkConnected()) {
+                    Intent disp = new Intent(getApplicationContext(), AQIDisplay.class);
+                    disp.putExtra(STATE_AND_CITY, centreName);
+                    startActivity(disp);
+                }
+                else{
+                    Toast mToast = Toast.makeText(getApplicationContext(),"Please Connect to internet",Toast.LENGTH_SHORT);
+                    mToast.show();
+                }
             }
         });
         //LinearLayout mLinearLayout = (LinearLayout) findViewById(R.id.fragment_container);
 
+    }
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo ni = cm.getActiveNetworkInfo();
+        if (ni == null) {
+            // There are no active networks.
+            return false;
+        } else
+            return true;
     }
 
     @Override

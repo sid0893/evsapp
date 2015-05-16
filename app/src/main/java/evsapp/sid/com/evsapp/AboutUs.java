@@ -45,16 +45,18 @@ public class AboutUs extends ActionBarActivity {
             // Create a CardHeader
             CardHeader header = new CardHeader(this);
             // Add Header to card
-            header.setTitle("                               "+names[i]);
-            card.setTitle("              Android");
-            card.setCardElevation(1000);
+            header.setTitle(names[i]);
+            card.setTitle("Android");
+            card.setCardElevation(5000);
             card.setShadow(true);
+            //card.setBackgroundColorResourceId(R.color.blue);
 
-            //card.setBackgroundResourceId(R.color.PaleTurquoise);
+            card.setBackgroundResourceId(R.color.blue);
             card.addCardHeader(header);
 
             CardThumbnail thumb = new CardThumbnail(this);
             thumb.setDrawableResource(listImages[i]);
+
             card.addCardThumbnail(thumb);
 
             cards.add(card);

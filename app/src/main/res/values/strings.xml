@@ -21,19 +21,65 @@
     <string name="abt_us2">We do not guarantee that the information is correct.</string>
     <string name="website">"<font color='#111'>(http://www.cpcb.gov.in/CAAQM/mapPage/frmindiamap.aspx).\n</font>"</string>
     <string-array name="states_list">
-        <item>TELANGANA</item>
-        <item>DELHI</item>
-        <item>GUJARAT</item>
-        <item>HARYANA</item>
-        <item>KARNATAKA</item>
-        <item>MAHARASHTRA</item>
-        <item>TAMIL NADU</item>
-        <item>UTTAR PRADESH</item>
+        <!--<item>telangana</item>-->
+        <item>delhi</item>
+        <item>gujarat</item>
+        <item>haryana</item>
+        <item>karnataka</item>
+        <item>maharashtra</item>
+        <item>tamil_nadu</item>
+        <item>uttar_pradesh</item>
     </string-array>
     <string-array name="navigation_drawer">
         <item>Air Quality Index (AQI)</item>
         <item>About Us</item>
         <item>Tell a friend!</item>
+    </string-array>
+    
+    <string-array name="delhi" id="@+id/delhi">
+        <item>Delhi : D.C.E.</item>
+        <item>Delhi : Shadipur</item>
+        <item>Delhi : I.T.O.</item>
+        <item>Delhi : Dilshad Garden</item>
+        <item>Delhi : Dwarka</item>
+        <item>Delhi : Punjabi Bagh</item>
+        <item>Delhi : I.G.I Airport</item>
+        <item>Delhi : I.S.B.T. Anand Vihar</item>
+        <item>Delhi : Mandir Marg</item>
+        <item>Delhi : Civil Lines</item>
+        <item>Delhi : R.K. Puram</item>
+    </string-array>
+
+    <string-array name="uttar_pradesh">
+        <item>Agra : Sanjay Palace</item>
+        <item>Lucknow : Talkatora</item>
+        <item>Lucknow : Lalbagh</item>
+        <item>Lucknow : Central School</item>
+        <item>Kanpur : Central School</item>
+        <item>Varanasi : Ardhali Bazar</item>
+    </string-array>
+    <string-array name="telangana">
+        <item>Hyderabad : SanathNagar</item>
+    </string-array>
+    <string-array name="gujarat">
+        <item>Ahmedabad : Maninagar</item>
+    </string-array>
+    <string-array name="haryana">
+        <item>Faridabad : Sector16A Faridabad</item>
+    </string-array>
+    <string-array name="karnataka">
+        <item>Bangalore : BTM</item>
+        <item>Bangalore : Peenya</item>
+        <item>Bangalore : BWSSB Kadabesanahalli</item>
+    </string-array>
+    <string-array name="maharashtra">
+        <item>Mumbai : Navi Mumbai Municipal Corporation AIROLI</item>
+        <item>Chandrapur : Chandrapur</item>
+    </string-array>
+    <string-array name="tamil_nadu">
+        <item>Chennai : Alandur Bus Depot</item>
+        <item>Chennai : IIT</item>
+        <item>Chennai : Manali</item>
     </string-array>
 
     <!--
