@@ -35,6 +35,7 @@ public class LocationBased extends ActionBarActivity implements LocationListener
     private GoogleMap map; // Might be null if Google Play services APK is not available.
     Jsontodata mJsontodata;
     Location mLocation = null;
+    Snackbar mSnackbar;
 
     public class Compare implements Comparator<Location> {
 
@@ -87,8 +88,17 @@ public class LocationBased extends ActionBarActivity implements LocationListener
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(
                 new LatLng(location.getLatitude(), location.getLongitude()), 11));
 
+        if(mJsontodata.mLocations==null){
+            mSnackbar =  Snackbar.with(getApplicationContext())
+                    .duration(Snackbar.SnackbarDuration.LENGTH_INDEFINITE)// context
+                    .text("Please wait while Nearest Locations are retrieved") // text to display
+                    ;
+            mSnackbar.show(this);
+
+        }
         if(mJsontodata.mLocations!=null) {
             Collections.sort(mJsontodata.mLocations, new Compare());
+            mSnackbar.dismiss();
             //ArrayList<Marker> markers = new ArrayList<>();
             for (int i = 0; i < 3 && i < mJsontodata.mLocations.size(); i++) {
                 latLng = new LatLng(mJsontodata.mLocations.get(i).getLatitude(), mJsontodata.mLocations.get(i).getLongitude());
@@ -100,10 +110,11 @@ public class LocationBased extends ActionBarActivity implements LocationListener
                         .draggable(false));
                 //markers.add(marker);
             }
-            Snackbar.with(getApplicationContext())
+            mSnackbar = Snackbar.with(getApplicationContext())
                     .duration(Snackbar.SnackbarDuration.LENGTH_LONG)// context
                     .text("Select one from the nearest 3 locations") // text to display
-                    .show(this); // activity where it is displayed
+                    ; // activity where it is displayed
+            mSnackbar.show(this);
         }
 
 
