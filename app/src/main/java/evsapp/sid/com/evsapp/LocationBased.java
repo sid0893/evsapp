@@ -35,7 +35,7 @@ public class LocationBased extends ActionBarActivity implements LocationListener
     private GoogleMap map; // Might be null if Google Play services APK is not available.
     Jsontodata mJsontodata;
     Location mLocation = null;
-    Snackbar mSnackbar;
+    Snackbar mSnackbar=null;
 
     public class Compare implements Comparator<Location> {
 
@@ -98,7 +98,8 @@ public class LocationBased extends ActionBarActivity implements LocationListener
         }
         if(mJsontodata.mLocations!=null) {
             Collections.sort(mJsontodata.mLocations, new Compare());
-            mSnackbar.dismiss();
+            if(mSnackbar!=null)
+                mSnackbar.dismiss();
             //ArrayList<Marker> markers = new ArrayList<>();
             for (int i = 0; i < 3 && i < mJsontodata.mLocations.size(); i++) {
                 latLng = new LatLng(mJsontodata.mLocations.get(i).getLatitude(), mJsontodata.mLocations.get(i).getLongitude());
